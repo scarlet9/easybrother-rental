@@ -2,4 +2,18 @@
     margin: 0;
     padding: 0;
     height: 500px;
+#pikachu {
+	text-align: center;
+	display: block;
+	margin: 50px auto;
+}
+
+body#login-body {
+	background-image: url('../img/songdo.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+body#login-body > .container-fluid {
+	background: rgba(255,255,255,0.7);
 }
