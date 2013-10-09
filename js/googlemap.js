@@ -10,14 +10,14 @@ var neighborhoods = [
   new google.maps.LatLng(37.3841735015448, 126.66866183280945) // 약대 귀양지
 ];
 
-
+  
 function initialize() {
 
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-          alert('it works');
+          //alert('it works');
       }, function(error) {
-          alert('Error occurred. Error code: ' + error.code);         
+          //alert('Error occurred. Error code: ' + error.code);         
       },{timeout:50000});
   }else{
       alert('no geolocation support');
@@ -36,6 +36,24 @@ function initialize() {
   });
   */
   drop();
+
+  // table setting
+  $("table").css("visibility", "hidden");
+  
+  $("#tr0 td:nth-child(3) button").click(function(){    
+    setTrDisable(0);
+  });
+  $("#tr1 td:nth-child(3) button").click(function(){    
+    setTrDisable(1);
+  });
+  $("#tr2 td:nth-child(3) button").click(function(){    
+    setTrDisable(2);
+  });
+  $("#tr3 td:nth-child(3) button").click(function(){    
+    setTrDisable(3);
+  });
+  
+  
 }
 
 
@@ -59,7 +77,8 @@ function drop() {
   }
 }
 
-function addMarker() {
+function addMarker() {  
+  var id = iterator;
   var marker = new google.maps.Marker({
     position: neighborhoods[iterator],
     map: map,
@@ -67,18 +86,60 @@ function addMarker() {
     animation: google.maps.Animation.DROP
   });
   google.maps.event.addListener(marker, 'click', function(e) {
-    toggleBounce(marker);
+    toggleBounce(marker, id);
   });
   markers.push(marker);
   
   iterator++;
 }
 
-function toggleBounce(marker) {
+function toggleBounce(marker, id) {
 
   if (marker.getAnimation() != null) {
     marker.setAnimation(null);
   } else {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
+  $("table").css("visibility", "visible");
+  switch(id){
+    case 0:
+      setTrAvailable(0);
+      setTrDisable(1);
+      setTrAvailable(2);
+      setTrDisable(3);
+
+    break;
+    case 1:
+      setTrDisable(0);
+      setTrDisable(1);
+      setTrDisable(2);
+      setTrDisable(3);
+    break;
+    case 2:
+      setTrAvailable(0);
+      setTrAvailable(1);
+      setTrAvailable(2);  
+      setTrAvailable(3);
+    break;
+    case 3:
+      setTrDisable(0);
+      setTrAvailable(1);
+      setTrDisable(2);
+      setTrAvailable(3);
+      
+    break;
+  }
+}
+
+function setTrDisable(trId){
+  $("#tr" + trId).removeClass("success").addClass("error");
+  $("#tr" + trId + " td:nth-child(2)").text("Disable");
+  $("#tr" + trId + " td:nth-child(3) button").css("visibility","hidden");  
+
+}
+
+function setTrAvailable(trId){
+  $("#tr" + trId).removeClass("error").addClass("success");
+  $("#tr" + trId + " td:nth-child(2)").text("Avalable");
+  $("#tr" + trId + " td:nth-child(3) button").css("visibility","visible");
 }
