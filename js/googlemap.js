@@ -12,6 +12,17 @@ var neighborhoods = [
 
 
 function initialize() {
+
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          alert('it works');
+      }, function(error) {
+          alert('Error occurred. Error code: ' + error.code);         
+      },{timeout:50000});
+  }else{
+      alert('no geolocation support');
+  }
+    
   var mapOptions = {
     zoom: 16,
     center: new google.maps.LatLng(37.38519648783452, 126.66671991348267),
