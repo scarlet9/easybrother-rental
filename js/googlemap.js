@@ -86,21 +86,38 @@ function addMarker() {
     animation: google.maps.Animation.DROP
   });
   google.maps.event.addListener(marker, 'click', function(e) {
-    toggleBounce(marker, id);
+    toggleBounce(id);
   });
   markers.push(marker);
   
   iterator++;
 }
 
-function toggleBounce(marker, id) {
-
+function toggleBounce(id) {
+  /*
   if (marker.getAnimation() != null) {
     marker.setAnimation(null);
   } else {
     marker.setAnimation(google.maps.Animation.BOUNCE);
+  }*/
+  for(var i = 0; i < markers.length; i++){
+    if(id == i){
+      markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    }
+    else{
+      markers[i].setAnimation(null); 
+    }
+
   }
+  markers[id].setAnimation(google.maps.Animation.BOUNCE);
+
   $("table").css("visibility", "visible");
+
+
+  setReservationTable(id);
+}
+
+function setReservationTable(id){
   switch(id){
     case 0:
       setTrAvailable(0);
