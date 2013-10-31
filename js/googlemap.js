@@ -33,10 +33,10 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
-  /*google.maps.event.addListener(map, 'click', function(e) {
+  google.maps.event.addListener(map, 'click', function(e) {
     placeMarker(e.latLng, map);
   });
-  */
+  
   drop();
 
   // table setting
@@ -132,12 +132,7 @@ function addMarker() {
 }
 
 function toggleBounce(id) {
-  /*
-  if (marker.getAnimation() != null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }*/
+  
   for(var i = 0; i < markers.length; i++){
     if(id == i){
       markers[i].setAnimation(google.maps.Animation.BOUNCE);
