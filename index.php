@@ -9,6 +9,7 @@ Epi::init('api');
 // Setup Database.
 Epi::init('database');
 EpiDatabase::employ('mysql', 'bicycle', 'localhost', 'bicycle', 'cyzhgkdla');
+getDatabase()->execute('SET NAMES utf8');
 
 // Setup Session.
 Epi::init('session');
