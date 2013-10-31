@@ -10,11 +10,7 @@ var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
 
 var neighborhoods = [];
 
-jQuery.get('/racks', function(response) {
-  for(var i = 0; i < response.data.length; i++){
-    neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
-  }
-});  
+
 
   
 function initialize() {
@@ -197,6 +193,15 @@ function setTrAvailable(trId){
   $("#tr" + trId + " td:nth-child(3) button").css("visibility","visible");
 }
 */
+
+jQuery.get('/racks', function(response) {
+  for(var i = 0; i < response.data.length; i++){
+    neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+  }
+
+  drop();
+});
+
 function calcDistance(p1, p2){
   //return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
   return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
