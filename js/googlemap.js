@@ -10,15 +10,15 @@ var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
 
 var neighborhoods = [];
 
-
+jQuery.get('/racks', function(response) {
+  for(var i = 0; i < response.data.length; i++){
+    neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+  }
+});  
 
   
 function initialize() {
-  jQuery.get('/racks', function(response) {
-    for(var i = 0; i < response.data.length; i++){
-      neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
-    }
-  });
+  
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
           //alert('it works');
