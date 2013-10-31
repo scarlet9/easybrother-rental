@@ -46,7 +46,7 @@ class User {
 	public static function login() {
 		// Check user's school ID.
 		$school_id = post('school_id');
-		if (preg_match('/(20\d{8})|(\d{7})/', $school_id)) {
+		if (preg_match('^((20\d{8})|(\d{7}))$', $school_id)) {
 			// User id is valid. Now check database to get uid.
 			$user = getDatabase()->one('SELECT * FROM `user` WHERE `school_id`=:school_id', 
 				array(':school_id' => $school_id));
@@ -70,7 +70,7 @@ class User {
 	public static function logout() {
 		// Just delete session.
 		$uid = getSession()->get('uid');
-		getSession()->delete('uid');
+		getSession()->end('uid');
 
 		return with_status(null, ($uid)? 0 : 1);
 	}
