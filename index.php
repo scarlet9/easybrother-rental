@@ -37,6 +37,10 @@ function is_logged() {
 // 0. Internal API.
 
 // 1. Static Page API.
+getRoute()->get('/', array('Page', 'index'));
+getRoute()->get('/reservation', array('Page', 'reservation'));
+getRoute()->get('/logs', array('Page', 'logs'));
+getRoute()->get('/login', array('Page', 'logs'));
 
 // 2. Ajax Request API.
 getApi()->post('/user/login', array('User', 'login'), EpiApi::external); // school_id : integer.
@@ -49,6 +53,27 @@ getApi()->get('/racks/(\d+)', array('Rack', 'get_one'), EpiApi::external);
 getRoute()->run();
 
 // Routines
+class Page {
+	public function __construct() {
+		if (!is_logged()) {
+			// Get login page first for non-logged-in users.
+			include 'login.html';
+			exit;
+		}
+	}
+
+	public static function index() {
+		include 'index.html';
+	}
+
+	public static function reservation() {
+		include 'reservation.html';
+	}
+
+	public static function logs() {
+		include 'logs.html';
+	}
+}
 
 class User {
 	public static function login() {
