@@ -1,4 +1,6 @@
 // kkk.js
+var isMap = false;
+
 $(function(){
 	$( "#day" ).click(function() {		
 		setDay();
@@ -23,8 +25,23 @@ $(function(){
 			$( "#time" ).text($(this).text());
 	});		
 	}
+
+	$( "#btn-findmap" ).click(function() {
+		if(isMap){
+			$("#map-canvas").css("visibility", "hidden");
+			$(".span6 .btn-large").css("display", "inline");
+		} else {
+			$("#map-canvas").css("visibility", "visible");
+			$(".span6 .btn-large").css("display", "none");
+			
+		}
+		
+		isMap = !isMap;
+
+	});
 	
 });
+
 var dayByday = true;
 var time = 0;
 function setDay(){
