@@ -54,7 +54,7 @@ class User {
 			if ($user == false) {
 				// Insert user.
 				$user = array('school_id' => $school_id, 'name' => strval($school_id));
-				$user['uid'] = getDatabase()->execute('INSERT INTO `user` (`school_id`, `name`) VALUES (":school_id", ":name")', 
+				$user['uid'] = getDatabase()->execute('INSERT INTO `user` (`school_id`, `name`) VALUES (:school_id, :name)', 
 					array(':school_id' => $school_id, ':name' => $school_id));
 			}
 			
