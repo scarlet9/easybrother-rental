@@ -35,7 +35,7 @@
 	<!-- For Google Map API-->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script type="text/javascript" src="js/googlemap.js"></script>
-	
+	<script type="text/javascript" src="js/kkk.js"></script>
 </head>
 
 <body>
@@ -75,76 +75,113 @@
 					예약하기
 				</h1>
 			</div>
+
 			<div class="row-fluid">
 				<div class="span6">
-					<div id="map-canvas"></div>
+					 <button class="btn btn-block btn-warning btn-large" type="button">가장 가까운 대여소</button> 
+					 <br />
+					 <button class="btn btn-block btn-info btn-large" type="button">최근에 빌린 대여소</button> 
+					 <br />
+					 <button class="btn btn-block btn-success btn-large" type="button">지도에서 대여소 찾기</button>
 				</div>
-				<div class="span6">					
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>
-									#
-								</th>
-								<th>
-									Status
-								</th>								
-								<th>
-									Reservation
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="tr0" class="success">
-								<td>
-									1
-								</td>
-								<td>
-									Available
-								</td>								
-								<td>									
-									<button class="btn btn-info btn-small" type="button">Get Bicycle!</button>
-								</td>
-							</tr>
-							<tr id="tr1" class="success">
-								<td>
-									2
-								</td>
-								<td>
-									Available
-								</td>								
-								<td>
-									<button class="btn btn-info btn-small" type="button">Get Bicycle!</button>
-								</td>
-							</tr>
-							<tr id="tr2" class="error">
-								<td>
-									3
-								</td>
-								<td>
-									Disable
-								</td>
+				<div class="span6">
+					<div class="btn-group">
+						<button class="btn" id="day">Today</button> <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" id="day-today">Today</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#" id="day-tomorrow">Tomorrow</a>
+							</li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						 <button class="btn" id="time">00:00</button> <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
+						<ul class="dropdown-menu" id="time-menu">							
+							<li>
+								<a href="#" id="time-0">00:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-1">01:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-2">02:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-3">03:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-4">04:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-5">05:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-6">06:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-7">07:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-8">08:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-9">09:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-10">10:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-11">11:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-12">12:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-13">13:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-14">14:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-15">15:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-16">16:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-17">17:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-18">18:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-19">19:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-20">20:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-21">21:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-22">22:00</a>
+							</li>
+							<li>
+								<a href="#" id="time-23">23:00</a>
+							</li>
 								
-								<td>
-									<button class="btn btn-info btn-small" type="button">Get Bicycle!</button>
-								</td>
-							</tr>
-							<tr id="tr3" class="error">
-								<td>
-									4
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								
-								<td>
-									<button class="btn btn-info btn-small" type="button">Get Bicycle!</button>
-								</td>
-							</tr>							
-						</tbody>
-					</table>
-					
+						</ul>
+					</div>
+					<hr />
+					<div class="progress progress-striped active">
+						<div class="bar" style="width: 40%;"></div>
+						<div class="bar bar-danger" style="width: 60%;"></div>
+					</div>
 				</div>
+				<div id="map-canvas"></div>
 			</div>
 		</div>
 	</div>
