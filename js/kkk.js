@@ -2,6 +2,9 @@
 var isMap = false;
 
 $(function(){
+
+	
+
 	$( "#day" ).click(function() {		
 		setDay();
 	});
@@ -27,16 +30,12 @@ $(function(){
 	}
 
 	$( "#btn-findmap" ).click(function() {
-		if(isMap){
-			$("#map-canvas").css("visibility", "hidden");
-			$(".span6 .btn-large").css("display", "inline");
-		} else {
-			$("#map-canvas").css("visibility", "visible");
-			$(".span6 .btn-large").css("display", "none");
-			
-		}
-		
-		isMap = !isMap;
+		setButtons();		
+
+	});
+
+	$( "#btn-back" ).click(function() {
+		setButtons();		
 
 	});
 	
@@ -44,6 +43,26 @@ $(function(){
 
 var dayByday = true;
 var time = 0;
+
+function setButtons(){
+	if(isMap){
+		//$("#btn-back").css("display", "none");
+		$("#btn-back").css("visibility","hidden");
+		$("#map-canvas").css("visibility","hidden");
+		//$("#map-canvas").css("display", "none");			
+		$(".span6 .btn-large").css("display", "inline");
+	} else {
+		//$("#btn-back").css("display", "inline");
+		$("#btn-back").css("visibility","visible");
+		$("#map-canvas").css("visibility","visible");
+		//$("#map-canvas").css("display", "inline");
+		$(".span6 .btn-large").css("display", "none");
+		
+	}
+	
+	isMap = !isMap;
+}
+
 function setDay(){
 	if(dayByday){		
 		$( "#day" ).text("Tomorrow");

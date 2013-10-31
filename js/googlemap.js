@@ -32,16 +32,17 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-
+  /*
   google.maps.event.addListener(map, 'click', function(e) {
     placeMarker(e.latLng, map);
   });
-  
+  */
   drop();
 
   // table setting
   
   $("#map-canvas").css("visibility", "hidden");
+  $("#btn-back").css("visibility", "hidden");
   /*
   $("#tr0 td:nth-child(3) button").click(function(){    
     setTrDisable(0);
