@@ -31,6 +31,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/peter.js"></script>
 </head>
 
 <body id="login-body">
@@ -40,16 +41,20 @@
 			<h3 class="text-center">
 				국제 캠퍼스 자전거 대여
 			</h3>
-			<form class="form-horizontal">
+			<form class="form-horizontal" method="post">
 				<div class="control-group">
-					 <label class="control-label" for="inputEmail">학번</label>
+					 <label class="control-label" for="inputStudentNum">
+					 	학번S
+					 </label>
 					<div class="controls">
-						<input type="text" id="inputEmail">
+						<input type="text" id="inputStudentNum" name="userName">
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						 <label class="checkbox"><input type="checkbox">로그인 정보 저장</label> <button onclick="location.href='index.html';" type="button" class="btn">로그인</button>
+						 <button type="submit" class="btn">
+						 	로그인
+						 </button>
 					</div>
 				</div>
 			</form>
