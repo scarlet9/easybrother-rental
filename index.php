@@ -40,7 +40,7 @@ function is_logged() {
 getRoute()->get('/', array('Page', 'index'));
 getRoute()->get('/reservation', array('Page', 'reservation'));
 getRoute()->get('/logs', array('Page', 'logs'));
-getRoute()->get('/login', array('Page', 'logs'));
+getRoute()->get('/now', array('Page', 'now'));
 
 // 2. Ajax Request API.
 getApi()->post('/user/login', array('User', 'login'), EpiApi::external); // school_id : integer.
@@ -72,6 +72,11 @@ class Page {
 
 	public static function logs() {
 		include 'logs.html';
+	}
+
+	public static function now() {
+		//include 'now.html';
+		echo 'now page';
 	}
 }
 
