@@ -2,11 +2,13 @@
 select `uid`, `name` from `user` where `user`.`school_id` = '2010147106' limit 1;
 
 -- 모든 거치대 정보 가져오기
-select `rack`.*, count(*) as `count`
-from `rack` 
-join `bicycle` on `current_rack`
-where `reserved` = 0
-group by `current_rack`;
+SELECT * FROM `rack` ORDER BY `rid` ASC;
+
+-- 거치대 정보 가져오기
+SELECT *, 
+(SELECT COUNT(*)`bicycle` WHERE `current_rack` = `rack`.`rid`) AS `total_count`, 
+(SELECT COUNT(*)`bicycle` WHERE `current_rack` = `rack`.`rid` AND `reserved` = 0) AS `free_count`
+FROM `rack` WHERE `rid` = :rid GROUP BY `current_rack`;
 
 -- 예약하기
 start transaction;
