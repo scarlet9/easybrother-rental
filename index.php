@@ -54,7 +54,7 @@ getRoute()->run();
 
 // Routines
 class Page {
-	public function __construct() {
+	public function check_login() {
 		if (!is_logged()) {
 			// Get login page first for non-logged-in users.
 			include 'login.html';
@@ -63,19 +63,23 @@ class Page {
 	}
 
 	public static function index() {
+		Page::check_login();
 		include 'index.html';
 	}
 
 	public static function reservation() {
+		Page::check_login();
 		include 'reservation.html';
 	}
 
 	public static function logs() {
+		Page::check_login();
 		include 'logs.html';
 	}
 
 	public static function now() {
-		//include 'now.html';
+		Page::check_login();
+                //include 'now.html';
 		echo 'now page';
 	}
 }
