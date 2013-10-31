@@ -15,7 +15,7 @@
 					// Success!
 					//console.log(response.data);
 					//alert(JSON.stringify(response.data));
-					location.href = "index.html";
+					location.href = '/';
 					//var term = $('#inputStudentNum').val();
 				}
 				else {
