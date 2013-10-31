@@ -5,16 +5,22 @@ var iterator = 0;
 
 var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
 
+
+
+
 var neighborhoods = [
-  new google.maps.LatLng(37.38245144310285, 126.66660189628601), //기숙사 앞
-  new google.maps.LatLng(37.381377267809434, 126.6685438156128),  //송도 셔틀
-  new google.maps.LatLng(37.38756635245252, 126.66251420974731),  //송도 지하철역
-  new google.maps.LatLng(37.3841735015448, 126.66866183280945) // 약대 귀양지
+  
 ];
+
+
 
   
 function initialize() {
-
+  jQuery.get('/racks', function(response) {
+    for(var i = 0; i < response.data.length; i++){
+      neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+    }
+  });
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
           //alert('it works');
