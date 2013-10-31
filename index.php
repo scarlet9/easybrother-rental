@@ -72,7 +72,7 @@ class User {
 		$uid = getSession()->get('uid');
 		getSession()->delete('uid');
 
-		return with_status(null, !!$uid);
+		return with_status(null, ($uid)? 0 : 1);
 	}
 }
 ?>
