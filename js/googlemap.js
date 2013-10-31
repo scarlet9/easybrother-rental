@@ -41,7 +41,7 @@ function initialize() {
     placeMarker(e.latLng, map);
   });
   */
-  drop();
+  
 
   // table setting
   
@@ -61,7 +61,7 @@ function initialize() {
     setTrDisable(3);
   });
   */
-  
+  drop();
 }
 
 
