@@ -41,7 +41,7 @@ function initialize() {
 
   // table setting
   
-  //$("#map-canvas").css("visibility", "hidden");
+  $("#map-canvas").css("visibility", "hidden");
   /*
   $("#tr0 td:nth-child(3) button").click(function(){    
     setTrDisable(0);
