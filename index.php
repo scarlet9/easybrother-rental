@@ -97,9 +97,9 @@ class Rack {
 		if (!is_logged()) return error('Permission Denied', -99);
 
 		$rack = getDatabase()->one('SELECT *, 
-			(SELECT COUNT(*)`bicycle` WHERE `current_rack` = `rack`.`rid`) AS `total_count`, 
-			(SELECT COUNT(*)`bicycle` WHERE `current_rack` = `rack`.`rid` AND `reserved` = 0) AS `free_count`
-			FROM `rack` WHERE `rid` = :rid GROUP BY `current_rack` LIMIT 1', 
+			(SELECT COUNT(*) FROM `bicycle` WHERE `current_rack` = `rack`.`rid`) AS `total_count`, 
+			(SELECT COUNT(*) FROM `bicycle` WHERE `current_rack` = `rack`.`rid` AND `reserved` = 0) AS `free_count`
+			FROM `rack` WHERE `rid` = :rid LIMIT 1', 
 			array(':rid' => $rid)
 		);
 
