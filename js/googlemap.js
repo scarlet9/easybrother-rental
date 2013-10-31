@@ -8,9 +8,7 @@ var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
 
 
 
-var neighborhoods = [
-  
-];
+var neighborhoods = [];
 
 
 
