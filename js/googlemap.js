@@ -40,8 +40,9 @@ function initialize() {
   drop();
 
   // table setting
-  $("table").css("visibility", "hidden");
   
+  //$("#map-canvas").css("visibility", "hidden");
+  /*
   $("#tr0 td:nth-child(3) button").click(function(){    
     setTrDisable(0);
   });
@@ -54,7 +55,7 @@ function initialize() {
   $("#tr3 td:nth-child(3) button").click(function(){    
     setTrDisable(3);
   });
-  
+  */
   
 }
 
@@ -144,12 +145,9 @@ function toggleBounce(id) {
   }
   markers[id].setAnimation(google.maps.Animation.BOUNCE);
 
-  $("table").css("visibility", "visible");
-
-
-  setReservationTable(id);
+  
 }
-
+/*
 function setReservationTable(id){
   switch(id){
     case 0:
@@ -193,7 +191,7 @@ function setTrAvailable(trId){
   $("#tr" + trId + " td:nth-child(2)").text("Avalable");
   $("#tr" + trId + " td:nth-child(3) button").css("visibility","visible");
 }
-
+*/
 function calcDistance(p1, p2){
   //return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
   return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
