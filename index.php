@@ -8,7 +8,7 @@ Epi::init('api');
 
 // Setup Database.
 Epi::init('database');
-EpiDatabase::employ('mysql', 'bicycle', 'bicycle', 'dlwlgud123');
+EpiDatabase::employ('mysql', 'bicycle', 'localhost', 'bicycle', 'cyzhgkdla');
 
 // Setup Session.
 Epi::init('session');
@@ -49,7 +49,7 @@ class User {
 		if (preg_match('/(20\d{8})|(\d{7})/', $school_id)) {
 			// User id is valid. Now check database to get uid.
 			$user = getDatabase()->one('SELECT * FROM `user` WHERE `school_id`=:school_id', 
-				array(':school_id' => $school_id);
+				array(':school_id' => $school_id));
 
 			if ($user == false) {
 				// Insert user.
