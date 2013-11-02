@@ -184,7 +184,7 @@ class Rent {
 					array(':uid' => $uid, ':bid' => $bicycle['bid'], ':rack_start' => $bicycle['rid'], ':state' => 1)
 				);
 
-				return with_status(array('rid' => $bicycle['rid'], 'bid' => $bicycle['bid']);
+				return with_status(array('rid' => $bicycle['rid'], 'bid' => $bicycle['bid']));
 			}
 			else {
 				// Someone took that bicycle. Retry.
