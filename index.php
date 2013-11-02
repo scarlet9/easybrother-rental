@@ -79,7 +79,7 @@ class Page {
 
 	public static function now() {
 		Page::check_login();
-                //include 'now.html';
+		//include 'now.html';
 		echo 'now page';
 	}
 }
