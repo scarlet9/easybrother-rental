@@ -97,9 +97,9 @@ function nearStationDrop() {
 function drop() {
   
   for (var i = 0; i < neighborhoods.length; i++) {    
-    var temp = i;
+
     setTimeout(function() {
-      addMarker2(temp);
+      addMarker();
     }, i * 200);
     
     
@@ -123,19 +123,6 @@ function addMarker() {
   iterator++;
 }
 
-function addMarker2(id) {
-  var marker = new google.maps.Marker({
-    position: neighborhoods[id],
-    map: map,
-    draggable: false,
-    animation: google.maps.Animation.DROP
-  });
-  google.maps.event.addListener(marker, 'click', function(e) {
-    toggleBounce(id);
-    showRackState(id);
-  });
-  markers.push(marker);
-}
 
 function toggleBounce(id) {
   
