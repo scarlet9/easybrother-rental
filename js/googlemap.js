@@ -209,7 +209,7 @@ function resetDrop(){
   
 }
 
-function resetDrop(id){
+function oneRackOnMap(id){
   deleteMarkers();
   jQuery.get('/racks/'+id, function(response) {    
     racks.push(response.data.rid);
