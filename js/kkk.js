@@ -104,4 +104,5 @@ function initReserveView(){
 	$( "#btn-reserve").addClass("disabled");
 	$( "#bar-free").width("0%");
 	$( "#bar-rest").width("0%");
+	$("#locationInfo").text("");
 }

@@ -147,7 +147,7 @@ function showRackState(id){
     //response.data
     var free = response.data.free_count/response.data.total_count;
     var rest = 1 - free;
-    
+
     $("#bar-free").width(100*free+"%");
     $("#bar-rest").width(100*rest+"%");
 
@@ -156,6 +156,8 @@ function showRackState(id){
     } else {
       $( "#btn-reserve").addClass("disabled");
     }
+
+    $("#locationInfo").text(response.data.name);
   });
 }
 
