@@ -232,26 +232,28 @@ function geo_success_now(latit, longi) {
 	    	nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 	    }   
 	    
+	    var currentLocation = new google.maps.LatLng(latit, longi);
+	
+		var minValue = calcDistance(currentLocation, nTemp[0]);
+		var minIndex = 0;
+
+		for(var i = 1; i < nTemp.length; i++) {    
+			var result = calcDistance(currentLocation, nTemp[i]);
+			
+			if(minValue > result){
+				minValue = result;
+				minIndex = i;
+			}
+		}
+
+		currentRid = rTemp[minIndex];
+		console.log(nTemp);
+		console.log(rTemp);
+		console.log(currentLocation);
+		console.log(currentRid);
+		$( "#btn-reserve" ).click();
+	    
   	});
 
-  	var currentLocation = new google.maps.LatLng(latit, longi);
-	
-	var minValue = calcDistance(currentLocation, nTemp[0]);
-	var minIndex = 0;
 
-	for(var i = 1; i < nTemp.length; i++) {    
-		var result = calcDistance(currentLocation, nTemp[i]);
-		
-		if(minValue > result){
-			minValue = result;
-			minIndex = i;
-		}
-	}
-
-	currentRid = rTemp[minIndex];
-	console.log(nTemp);
-	console.log(rTemp);
-	console.log(currentLocation);
-	console.log(currentRid);
-	$( "#btn-reserve" ).click();
 }
