@@ -1,6 +1,6 @@
 // kkk.js
 var isMap = false;
-var wpid;
+var wpid = -1;
 $(function(){
 
 	
@@ -157,7 +157,11 @@ function setTomorrow(){
 }
 
 function initReserveView(){
-	navigator.geolocation.clearWatch(wpid);
+	if(wpid > 0){
+		navigator.geolocation.clearWatch(wpid);
+		wpid = -1;
+	}
+
 	$( "#btn-reserve").addClass("disabled");
 	$( "#bar-free").width("0%");
 	$( "#bar-rest").width("0%");
@@ -199,7 +203,7 @@ function calcDistance(p1, p2){
 
 function geo_success(position) {
 	var minIndex = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
-
+	showRackState(racks[minIndex]);
 	oneRackOnMap(minIndex);
 
 }
