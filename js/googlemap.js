@@ -7,7 +7,7 @@ var iterator = 0;
 var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
 
 
-
+var currentRid = -1;
 
 var neighborhoods = [];
 
@@ -158,6 +158,7 @@ function showRackState(id){
     }
 
     $("#locationInfo").text(response.data.name);
+    currentRid = racks[id];
   });
 }
 
