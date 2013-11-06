@@ -128,6 +128,7 @@ function addMarker() {
   });
   google.maps.event.addListener(marker, 'click', function(e) {
     toggleBounce(id);
+    showRackState(id);
   });
   markers.push(marker);
   
