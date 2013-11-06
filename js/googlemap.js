@@ -99,7 +99,7 @@ function drop() {
   for (var i = 0; i < neighborhoods.length; i++) {    
     
     setTimeout(function() {
-      addMarker();
+      addMarker2(id);
     }, i * 200);
     
     
@@ -121,6 +121,20 @@ function addMarker() {
   markers.push(marker);
   
   iterator++;
+}
+
+function addMaker2(id) {
+  var marker = new google.maps.Marker({
+    position: neighborhoods[iterator],
+    map: map,
+    draggable: false,
+    animation: google.maps.Animation.DROP
+  });
+  google.maps.event.addListener(marker, 'click', function(e) {
+    toggleBounce(id);
+    showRackState(id);
+  });
+  markers.push(marker);
 }
 
 function toggleBounce(id) {
