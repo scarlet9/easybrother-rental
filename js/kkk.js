@@ -163,8 +163,9 @@ function initReserveView(){
 	$( "#bar-rest").width("0%");
 	$("#locationInfo").text("");
 	currentRid = -1;
-
-	setButtons();
+	if (gBrowser.mobile) {
+		setButtons();
+	}
 }
 
 function clickResereBtn(){
