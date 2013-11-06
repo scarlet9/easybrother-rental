@@ -11,18 +11,13 @@
 				'school_id' : $('#inputStudentNum').val()
 			},
 			function(response) {
-				if (response.status === 0) {
-					// Success!
-					//console.log(response.data);
-					//alert(JSON.stringify(response.data));
-					location.href = '/';
-					//var term = $('#inputStudentNum').val();
-				}
-				else {
-					// Fail.
-					alert(response.data);
-				}
-			}, 'json');
+				// Success!
+				location.href = '/';
+			}, 'json')
+			.fail(function(jqxhr) {
+				// Fail.
+				alert(jqxhr.responseJSON.data);
+			});
 			
 			return false;
 		});
