@@ -30,21 +30,29 @@ $(function(){
 	}
 
 	$( "#btn-findmap" ).click(function() {
-		setButtons();		
-
+		setButtons();
+		initReserveView();
 	});
 
 	$( "#btn-back" ).click(function() {
-		setButtons();		
-
+		setButtons();
+		initReserveView();
 	});
 	
+	$( "#btn-lastRackHistory" ).click(function() {		
+		initReserveView();
+	});
+	
+	$( "#btn-nearestRack" ).click(function() {		
+		initReserveView();
+	});
 	if(window.localStorage.getItem('lastRackHistory') === null){
 		$( "#btn-lastRackHistory").addClass("disabled");
 	} else {
 		$( "#btn-lastRackHistory").removeClass("disabled");
 	}
 
+	
 });
 
 var dayByday = true;
@@ -68,6 +76,8 @@ function setButtons(){
 	}
 	
 	isMap = !isMap;
+
+
 }
 
 function setDay(){
@@ -90,3 +100,8 @@ function setTomorrow(){
 	dayByday = false;	
 }
 
+function initReserveView(){
+	$( "#btn-reserve").addClass("disabled");
+	$( "#bar-free").width("0%");
+	$( "#bar-rest").width("0%");
+}
