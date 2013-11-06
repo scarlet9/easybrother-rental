@@ -41,6 +41,10 @@ $(function(){
 	
 	$( "#btn-lastRackHistory" ).click(function() {		
 		initReserveView();
+		// this function is in googlemap.js
+		if(window.localStorage.getItem('lastRackHistory') > -1){
+			showRackState(window.localStorage.getItem('lastRackHistory'));
+		}
 	});
 	
 	$( "#btn-nearestRack" ).click(function() {		
@@ -58,12 +62,17 @@ $(function(){
 			'rid' : ''+currentRid
 		},
 		function(response) {
+			alert(response);
 			if (response.status === 0) {
 				// Success!
 				//console.log(response.data);
 				//alert(JSON.stringify(response.data));
-				location.href = '/reservation';
+				window.localStorage.setItem('lastRackHistory', currentRid);
+
+				//location.href = '/reservation';
+				showRackState(currentRid);
 				//var term = $('#inputStudentNum').val();
+
 			}
 			else {
 				// Fail.
@@ -75,10 +84,10 @@ $(function(){
 	});
 
 
-	if(window.localStorage.getItem('lastRackHistory') === null){
-		$( "#btn-lastRackHistory").addClass("disabled");
+	if(window.localStorage.getItem('lastRackHistory') > -1){
+		$( "#btn-lastRackHistory").removeClass("disabled");		
 	} else {
-		$( "#btn-lastRackHistory").removeClass("disabled");
+		$( "#btn-lastRackHistory").addClass("disabled");
 	}
 
 	
@@ -135,5 +144,9 @@ function initReserveView(){
 	$( "#bar-rest").width("0%");
 	$("#locationInfo").text("");
 	currentRid = -1;
+}
+
+function clickResereBtn(){
+	
 }
 
