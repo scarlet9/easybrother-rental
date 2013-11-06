@@ -39,7 +39,7 @@ $(function(){
 
 	});
 	
-	if(windows.localStorage.getItem('lastRackHistory') === null){
+	if(window.localStorage.getItem('lastRackHistory') === null){
 		$( "#btn-lastRackHistory").addClass("disabled");
 	} else {
 		$( "#btn-lastRackHistory").removeClass("disabled");
