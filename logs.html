@@ -79,7 +79,7 @@
 				예약 취소
 			</h3>
 			<p>
-				아직 대여하지 않은 상태일 경우 예약을 취소 할 수 있습니다.
+				예약을 하였으나 아직 대여하지 않은 상태일 경우 예약을 취소할 수 있습니다.
 			</p>
 			<a id="modal-cancel" href="#modal-container-cancel" role="button" class="btn btn-info" data-toggle="modal">예약 취소</a>
 			</div>
@@ -108,7 +108,7 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					 <button class="btn" data-dismiss="modal" aria-hidden="true">닫기</button> <button class="btn btn-danger">취소합니다</button>
+					 <button class="btn" data-dismiss="modal" aria-hidden="true">닫기</button> <button id="do-cancel" data-dismiss="modal" class="btn btn-danger">취소합니다</button>
 				</div>
 			</div>
 			<div id="modal-container-return" class="modal hide fade" role="dialog">
@@ -124,7 +124,7 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					 <button class="btn" data-dismiss="modal" aria-hidden="true">닫기</button> <button class="btn btn-primary">반납</button>
+					 <button class="btn" data-dismiss="modal" aria-hidden="true">닫기</button> <button id="do-return" data-dismiss="modal" class="btn btn-primary">반납</button>
 				</div>
 			</div>
 
@@ -206,6 +206,18 @@
 			else {
 				$('#log-table').show();
 			}
+		});
+	});
+	
+	$('#do-cancel').click(function() {
+		// Post reservation cancel request.
+		$.post('/bicycle/cancel', function(response) {
+			// Fix log and clear DOM.
+			$('.log-state-1').find('td').last().text(state_string[4]);
+			$('#modal-cancel-zone').remove();
+		})
+		.fail(function(jqxhr) {
+			alert(jqxhr.responseJSON.data);
 		});
 	});
 })(jQuery, gBrowser);
