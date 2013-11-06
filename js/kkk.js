@@ -84,10 +84,11 @@ $(function(){
 	});
 
 
-	if(window.localStorage.getItem('lastRackHistory') > -1){
-		$( "#btn-lastRackHistory").removeClass("disabled");		
-	} else {
+	if(window.localStorage.getItem('lastRackHistory') == "" || 
+		window.localStorage.getItem('lastRackHistory') == null ){		
 		$( "#btn-lastRackHistory").addClass("disabled");
+	} else {
+		$( "#btn-lastRackHistory").removeClass("disabled");
 	}
 
 	
