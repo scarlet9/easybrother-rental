@@ -280,8 +280,8 @@ function geo_success_logs(latit, longi, state_string){
 			//location.href = '/reservation';
 			alert('반납에 성공하였습니다. 이용해 주셔서 감사합니다.');
 			$('.log-state-2').find('td').last().text(state_string[3]);
+			$('#modal-return-zone').remove();
 			$('#return-alert').remove();
-			
 		}, 'json')
 		.fail(function(jqxhr) {
 			// Fail.
