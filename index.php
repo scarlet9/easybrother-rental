@@ -35,6 +35,8 @@ function is_logged() {
 	return !!(getSession()->get('uid'));
 }
 
+include_once './http_status.php';
+
 // Routes
 
 // 0. Internal API.
