@@ -44,21 +44,9 @@ function initialize() {
   
   $("#map-canvas").css("visibility", "hidden");
   $("#btn-back").css("visibility", "hidden");
-  /*
-  $("#tr0 td:nth-child(3) button").click(function(){    
-    setTrDisable(0);
-  });
-  $("#tr1 td:nth-child(3) button").click(function(){    
-    setTrDisable(1);
-  });
-  $("#tr2 td:nth-child(3) button").click(function(){    
-    setTrDisable(2);
-  });
-  $("#tr3 td:nth-child(3) button").click(function(){    
-    setTrDisable(3);
-  });
-  */
-  drop();
+  $( "#btn-reserve").addClass("disabled");
+ 
+  
 }
 
 
@@ -158,10 +146,15 @@ function showRackState(id){
     //response.data
     var free = response.data.free_count/response.data.total_count;
     var rest = 1 - free;
-    alert(free);
-    alert(rest);
+    
     $("#bar-free").width(100*free+"%");
-    $("#bar-rest").width(100*rest+"%");    
+    $("#bar-rest").width(100*rest+"%");
+
+    if(response.data.free_count > 0){
+      $( "#btn-reserve").removeClass("disabled");
+    } else {
+      $( "#btn-reserve").addClass("disabled");
+    }
   });
 }
 
@@ -188,15 +181,6 @@ function deleteMarkers() {
   markers = [];
   racks = [];
 }
-
-/*
-
-function setTrAvailable(trId){
-  $("#tr" + trId).removeClass("error").addClass("success");
-  $("#tr" + trId + " td:nth-child(2)").text("Avalable");
-  $("#tr" + trId + " td:nth-child(3) button").css("visibility","visible");
-}
-*/
 
 
 
