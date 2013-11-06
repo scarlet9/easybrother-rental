@@ -39,6 +39,12 @@ $(function(){
 
 	});
 	
+	if(windows.localStorage.getItem('lastRackHistory') === null){
+		$( "#btn-lastRackHistory").addClass("disabled");
+	} else {
+		$( "#btn-lastRackHistory").removeClass("disabled");
+	}
+
 });
 
 var dayByday = true;
@@ -57,7 +63,6 @@ function setButtons(){
 		$("#map-canvas").css("visibility","visible");
 		// this function is in googlemap.js
 		resetDrop();
-		
 		$(".span6 .btn-large").css("display", "none");
 		
 	}
@@ -84,3 +89,4 @@ function setTomorrow(){
 	$( "#day" ).text("Tomorrow");
 	dayByday = false;	
 }
+
