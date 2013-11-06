@@ -61,24 +61,17 @@ $(function(){
 		{
 			'rid' : ''+currentRid
 		},
-		function(response) {
-			alert(response);
+		function(response) {			
 			if (response.status === 0) {
-				// Success!
-				//console.log(response.data);
-				//alert(JSON.stringify(response.data));
+				// Success!				
 				window.localStorage.setItem('lastRackHistory', currentRid);
-
 				//location.href = '/reservation';
 				showRackState(currentRid);
-				//var term = $('#inputStudentNum').val();
-
-			}
-			else {
+		}, 'json')
+		.fail(function(jqxhr) {
 				// Fail.
-				alert(response.data);
-			}
-		}, 'json');
+				alert(jqxhr.responseJSON.data);
+		});
 		
 		return false;
 	});
