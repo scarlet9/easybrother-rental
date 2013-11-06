@@ -28,7 +28,7 @@ function with_status($data = null, $code = 0) {
 
 function error($error_string = 'Unknown Error', $code = 500) {
 	http_response_code($code);
-	return with_status(-$error_string, $code);
+	return with_status($error_string, -$code);
 }
 
 function is_logged() {
