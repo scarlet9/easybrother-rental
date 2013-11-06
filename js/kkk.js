@@ -1,4 +1,6 @@
 // kkk.js
+var neighborsTemp = [];
+var racksTemp = [];
 var isMap = false;
 var wpid = -1;
 $(function(){
@@ -53,11 +55,12 @@ $(function(){
 	
 	$( "#btn-nearestRack" ).click(function() {		
 		initReserveView();
-		deleteMarkers();
+		racksTemp = [];
+		neighborsTemp = [];
 		jQuery.get('/racks', function(response) {		    
 		    for(var i = 0; i < response.data.length; i++){
-		    	racks.push(response.data[i].rid);      
-		    	neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+		    	racksTemp.push(response.data[i].rid);      
+		    	neighborsTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 		    }   
 		    
 	  	});
@@ -180,11 +183,11 @@ function nearestNeighborhood(latit, longi){
    
 	var currentLocation = new google.maps.LatLng(latit, longi);
 	
-	var minValue = calcDistance(currentLocation, neighborhoods[0]);
+	var minValue = calcDistance(currentLocation, neighborsTemp[0]);
 	var minIndex = 0;
 
-	for(var i = 1; i < neighborhoods.length; i++) {    
-		var result = calcDistance(currentLocation, neighborhoods[i]);
+	for(var i = 1; i < neighborsTemp.length; i++) {    
+		var result = calcDistance(currentLocation, neighborsTemp[i]);
 		console.log(result);
 		if(minValue > result){
 			minValue = result;
@@ -192,7 +195,7 @@ function nearestNeighborhood(latit, longi){
 		}
 	}
 
-return racks[minIndex];
+return racksTemp[minIndex];
   
 }
 
