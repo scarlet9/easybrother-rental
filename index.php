@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+
 // Codes by scarlet, EBS PoolC
 
 // include Epi Library.
