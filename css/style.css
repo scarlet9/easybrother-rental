@@ -40,3 +40,23 @@ body .row-fluid, body .row {
 h1, h2, h3, h4, h5, h6 {
 	color: #172e6b;
 }
+
+.navbar .brand {
+	font-size: 15px;
+}
+
+h1 {
+	font-size: 25px;
+}
+
+h3 {
+	font-size: 22px;
+}
+
+table {
+	font-size: 12px;
+}
+
+dl {
+	font-size: 15px;
+}
