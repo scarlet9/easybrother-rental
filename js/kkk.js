@@ -61,12 +61,11 @@ $(function(){
 		{
 			'rid' : ''+currentRid
 		},
-		function(response) {			
-			if (response.status === 0) {
-				// Success!				
-				window.localStorage.setItem('lastRackHistory', currentRid);
-				//location.href = '/reservation';
-				showRackState(currentRid);
+		function(response) {		
+			// Success!				
+			window.localStorage.setItem('lastRackHistory', currentRid);
+			//location.href = '/reservation';
+			showRackState(currentRid);
 		}, 'json')
 		.fail(function(jqxhr) {
 				// Fail.
