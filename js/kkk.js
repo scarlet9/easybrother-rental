@@ -242,6 +242,49 @@ function geo_success_now(latit, longi) {
 
 }
 
+function geo_success_logs(latit, longi){
+	var nTemp = [];
+	var rTemp = [];
+	jQuery.get('/racks', function(response) {
+	    for(var i = 0; i < response.data.length; i++){
+	    	rTemp.push(response.data[i].rid);      
+	    	nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+	    }   
+	    
+	    var currentLocation = new google.maps.LatLng(latit, longi);
+	
+		var minValue = calcDistance(currentLocation, nTemp[0]);
+		var minIndex = 0;
+
+		for(var i = 1; i < nTemp.length; i++) {    
+			var result = calcDistance(currentLocation, nTemp[i]);
+			
+			if(minValue > result){
+				minValue = result;
+				minIndex = i;
+			}
+		}
+
+		
+		$.post('/bicycle/return',
+		{
+			'rid' : ''+rTemp[minIndex]
+		},
+		function(response) {		
+			// Success!
+			
+			//location.href = '/reservation';
+			alert('반납에 성공하였습니다. 이용해 주셔서 감사합니다.');
+			
+		}, 'json')
+		.fail(function(jqxhr) {
+			// Fail.
+			alert(jqxhr.responseJSON.data);
+		});
+
+  	});
+}
+
 function reservationClick(){
 	
 	if (currentRid == -1) {			
