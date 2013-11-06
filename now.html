@@ -28,6 +28,11 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+
+	<!-- For Google Map API-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+	<script type="text/javascript" src="js/googlemap.js"></script>
+	<script type="text/javascript" src="js/kkk.js"></script>
 </head>
 
 <body>
@@ -98,6 +103,9 @@
 			.fail(fail_func);
 		});
 		$('#get-new').click(function() {
+			navigator.geolocation.getCurrentPosition(function(position) {
+			  geo_success_now(position.coords.latitude, position.coords.longitude)
+			});
 		});
 	}
 })(jQuery, gBrowser);
