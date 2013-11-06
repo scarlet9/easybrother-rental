@@ -41,6 +41,10 @@ $(function(){
 	
 	$( "#btn-lastRackHistory" ).click(function() {		
 		initReserveView();
+		// this function is in googlemap.js
+		if(window.localStorage.getItem('lastRackHistory') > -1){
+			showRackState(window.localStorage.getItem('lastRackHistory'));
+		}
 	});
 	
 	$( "#btn-nearestRack" ).click(function() {		
@@ -48,30 +52,7 @@ $(function(){
 	});
 
 	$( "#btn-reserve" ).click(function() {
-		if (currentRid == -1) {			
-			console.log("rid error");
-			return false;
-		}
-		
-		$.post('/bicycle/reserve',
-		{
-			'rid' : ''+currentRid
-		},
-		function(response) {
-			if (response.status === 0) {
-				// Success!
-				//console.log(response.data);
-				//alert(JSON.stringify(response.data));
-				location.href = '/reservation';
-				//var term = $('#inputStudentNum').val();
-			}
-			else {
-				// Fail.
-				alert(response.data);
-			}
-		}, 'json');
-		
-		return false;
+		clickResereBtn();
 	});
 
 
@@ -135,5 +116,35 @@ function initReserveView(){
 	$( "#bar-rest").width("0%");
 	$("#locationInfo").text("");
 	currentRid = -1;
+}
+
+function clickResereBtn(){
+	if (currentRid == -1) {			
+		console.log("rid error");
+		return false;
+	}
+	
+	$.post('/bicycle/reserve',
+	{
+		'rid' : ''+currentRid
+	},
+	function(response) {
+		if (response.status === 0) {
+			// Success!
+			//console.log(response.data);
+			//alert(JSON.stringify(response.data));
+			window.localStorage.setItem('lastRackHistory', currentRid);
+
+			location.href = '/reservation';
+			//var term = $('#inputStudentNum').val();
+
+		}
+		else {
+			// Fail.
+			alert(response.data);
+		}
+	}, 'json');
+	
+	return false;
 }
 
