@@ -49,7 +49,7 @@ $(function(){
 
 	$( "#btn-reserve" ).click(function() {
 		if (currentRid == -1) {			
-			console.log(rid error);
+			console.log("rid error");
 			return false;
 		}
 		
