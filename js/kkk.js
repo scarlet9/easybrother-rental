@@ -62,6 +62,7 @@ $(function(){
 			'rid' : ''+currentRid
 		},
 		function(response) {
+			alert(response);
 			if (response.status === 0) {
 				// Success!
 				//console.log(response.data);
