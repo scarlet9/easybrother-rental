@@ -227,7 +227,7 @@
 
 	$('#do-return').click(function() {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			  geo_success_logs(position.coords.latitude, position.coords.longitude)
+			  geo_success_logs(position.coords.latitude, position.coords.longitude, state_string)
 			});
 	});		
 	

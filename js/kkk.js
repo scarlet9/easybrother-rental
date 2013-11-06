@@ -242,7 +242,7 @@ function geo_success_now(latit, longi) {
 
 }
 
-function geo_success_logs(latit, longi){
+function geo_success_logs(latit, longi, state_string){
 	var nTemp = [];
 	var rTemp = [];
 	jQuery.get('/racks', function(response) {
