@@ -185,13 +185,14 @@ function nearestNeighborhood(latit, longi){
 
 	for(var i = 1; i < neighborhoods.length; i++) {    
 		var result = calcDistance(currentLocation, neighborhoods[i]);
+		console.log(result);
 		if(minValue > result){
 			minValue = result;
 			minIndex = i;
 		}
 	}
 
-return minIndex;
+return racks[minIndex];
   
 }
 
@@ -202,9 +203,10 @@ function calcDistance(p1, p2){
 
 
 function geo_success(position) {
-	var minIndex = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
-	showRackState(racks[minIndex]);
-	oneRackOnMap(racks[minIndex]);
+	console.log(position);
+	var minRackId = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
+	showRackState(racks[minRackId]);
+	oneRackOnMap(racks[minRackId]);
 
 }
 
