@@ -175,7 +175,7 @@
 				$tr = $('<tr />');
 				$tr.append($('<td />').text(logs[i].lid));
 				$tr.append($('<td />').text(racks[logs[i].rack_start - 1].name));
-				$tr.append($('<td />').text((logs[i].time_start === "0000-00-00 00:00:00")? "" : logs[i].time_start));
+				$tr.append($('<td />').text((!logs[i].time_start || logs[i].time_start === "0000-00-00 00:00:00")? "" : logs[i].time_start));
 				$tr.append($('<td />').text(state_string[logs[i].state]));
 				$tr.addClass('log-state-' + logs[i].state.toString());
 
