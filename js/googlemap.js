@@ -116,7 +116,7 @@ function addMarker() {
   });
   google.maps.event.addListener(marker, 'click', function(e) {
     toggleBounce(id);
-    showRackState(id);
+    showRackState(racks[id]);
   });
   markers.push(marker);
   
@@ -143,7 +143,7 @@ function toggleBounce(id) {
 function showRackState(id){
   
 
-   jQuery.get('/racks/'+racks[id], function(response) {    
+   jQuery.get('/racks/'+id, function(response) {    
     //response.data
     var free = response.data.free_count/response.data.total_count;
     var rest = 1 - free;
@@ -158,7 +158,7 @@ function showRackState(id){
     }
 
     $("#locationInfo").text(response.data.name);
-    currentRid = racks[id];
+    currentRid = id;
   });
 }
 
@@ -209,9 +209,9 @@ function resetDrop(){
   
 }
 
-function oneRackOnMap(id){
+function resetDrop(id){
   deleteMarkers();
-  jQuery.get('/racks/'+racks[id], function(response) {    
+  jQuery.get('/racks/'+id, function(response) {    
     racks.push(response.data.rid);
     neighborhoods.push(new google.maps.LatLng(response.data.latitude, response.data.longitude));
     drop();
