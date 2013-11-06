@@ -204,7 +204,7 @@ function calcDistance(p1, p2){
 function geo_success(position) {
 	var minIndex = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
 	showRackState(racks[minIndex]);
-	oneRackOnMap(minIndex);
+	oneRackOnMap(racks[minIndex]);
 
 }
 
