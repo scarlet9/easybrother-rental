@@ -1,4 +1,5 @@
 // kkk.js
+var nrTempEnd = false;
 var neighborsTemp = [];
 var racksTemp = [];
 var isMap = false;
@@ -57,12 +58,13 @@ $(function(){
 		initReserveView();
 		racksTemp = [];
 		neighborsTemp = [];
+		nrTempEnd = false;
 		jQuery.get('/racks', function(response) {		    
 		    for(var i = 0; i < response.data.length; i++){
 		    	racksTemp.push(response.data[i].rid);      
 		    	neighborsTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 		    }   
-		    
+		    nrTempEnd = true;
 	  	});
 
 	  	wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
@@ -72,9 +74,7 @@ $(function(){
 		if (currentRid == -1) {			
 			console.log("rid error");
 			return false;
-		} else if( $( "#btn-reserve" ).hasClass( "disabled") ) {
-			return false;
-		}
+		} 
 		
 		$.post('/bicycle/reserve',
 		{
@@ -180,22 +180,26 @@ function clickResereBtn(){
 }
 
 function nearestNeighborhood(latit, longi){
-   
-	var currentLocation = new google.maps.LatLng(latit, longi);
+	if(nrTempEnd === true){
+		var currentLocation = new google.maps.LatLng(latit, longi);
 	
-	var minValue = calcDistance(currentLocation, neighborsTemp[0]);
-	var minIndex = 0;
+		var minValue = calcDistance(currentLocation, neighborsTemp[0]);
+		var minIndex = 0;
 
-	for(var i = 1; i < neighborsTemp.length; i++) {    
-		var result = calcDistance(currentLocation, neighborsTemp[i]);
-		
-		if(minValue > result){
-			minValue = result;
-			minIndex = i;
+		for(var i = 1; i < neighborsTemp.length; i++) {    
+			var result = calcDistance(currentLocation, neighborsTemp[i]);
+			
+			if(minValue > result){
+				minValue = result;
+				minIndex = i;
+			}
 		}
+
+		return racksTemp[minIndex];	
 	}
 
-return racksTemp[minIndex];
+	return -1;
+	
   
 }
 
@@ -208,8 +212,11 @@ function calcDistance(p1, p2){
 function geo_success(position) {
 	
 	var minRackId = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
-	showRackState(minRackId);
-	oneRackOnMap(minRackId);
+	if(minRackId > -1){
+		showRackState(minRackId);
+		oneRackOnMap(minRackId);	
+	}
+	
 
 }
 
@@ -219,8 +226,8 @@ function geo_error() {
 
 var geo_options = {
 	enableHighAccuracy: true, 
-	maximumAge        : 30000, 
-	timeout           : 27000
+	maximumAge        : 70000, 
+	timeout           : 30000
 };
 
 function geo_success_now(latit, longi) {	
@@ -252,7 +259,7 @@ function geo_success_now(latit, longi) {
 		console.log(currentLocation);
 		console.log(currentRid);
 		$( "#btn-reserve" ).click();
-	    
+
   	});
 
 
