@@ -188,7 +188,7 @@ function nearestNeighborhood(latit, longi){
 
 	for(var i = 1; i < neighborsTemp.length; i++) {    
 		var result = calcDistance(currentLocation, neighborsTemp[i]);
-		console.log(result);
+		
 		if(minValue > result){
 			minValue = result;
 			minIndex = i;
@@ -206,7 +206,7 @@ function calcDistance(p1, p2){
 
 
 function geo_success(position) {
-	console.log(position);
+	
 	var minRackId = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
 	showRackState(minRackId);
 	oneRackOnMap(minRackId);
