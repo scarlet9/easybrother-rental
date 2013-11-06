@@ -124,7 +124,7 @@ function setButtons(){
 		$("#div-day").css("visibility", "visible");
 		$("#div-probar").css("visibility", "visible");
 		// this function is in googlemap.js
-		resetDrop();
+		//resetDrop();
 		$(".span6 .btn-large").css("display", "none");
 		
 	}
