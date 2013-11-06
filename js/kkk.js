@@ -148,7 +148,7 @@ function setTomorrow(){
 }
 
 function initReserveView(){
-	navigator.geolocation.clearWatch(watchID);
+	navigator.geolocation.clearWatch(wpid);
 	$( "#btn-reserve").addClass("disabled");
 	$( "#bar-free").width("0%");
 	$( "#bar-rest").width("0%");
