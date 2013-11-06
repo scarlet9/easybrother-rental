@@ -156,8 +156,12 @@ function showRackState(id){
 
    jQuery.get('/racks/'+racks[id], function(response) {    
     //response.data
-    $("#bar-free").width(response.data.free_count+"%");
-    $("#bar-rest").width(response.data.total_count-response.data.free_count+"%");    
+    var free = response.data.free_count+"%";
+    var rest = response.data.total_count-response.data.free_count+"%";
+    alert(free);
+    alert(rest);
+    $("#bar-free").width(free);
+    $("#bar-rest").width(rest);    
   });
 }
 
