@@ -106,31 +106,31 @@ var dayByday = true;
 var time = 0;
 
 function setButtons(){
-	if(gBrowser.mobile){
-		if(isMap){
-			
-			$("#btn-back").css("visibility","hidden");
-			$("#map-canvas").css("visibility","hidden");
-			$("#div-time").css("visibility", "hidden");
-			$("#div-day").css("visibility", "hidden");
-			$("#div-probar").css("visibility", "hidden");
-
-			$(".span6 .btn-large").css("display", "inline");
-		} else {
-			
-			$("#btn-back").css("visibility","visible");
-			$("#map-canvas").css("visibility","visible");
-			$("#div-time").css("visibility", "visible");
-			$("#div-day").css("visibility", "visible");
-			$("#div-probar").css("visibility", "visible");
-			// this function is in googlemap.js
-			resetDrop();
-			$(".span6 .btn-large").css("display", "none");
-			
-		}
+	
+	if(isMap){
 		
-		isMap = !isMap;
+		$("#btn-back").css("visibility","hidden");
+		$("#map-canvas").css("visibility","hidden");
+		$("#div-time").css("visibility", "hidden");
+		$("#div-day").css("visibility", "hidden");
+		$("#div-probar").css("visibility", "hidden");
+
+		$(".span6 .btn-large").css("display", "inline");
+	} else {
+		
+		$("#btn-back").css("visibility","visible");
+		$("#map-canvas").css("visibility","visible");
+		$("#div-time").css("visibility", "visible");
+		$("#div-day").css("visibility", "visible");
+		$("#div-probar").css("visibility", "visible");
+		// this function is in googlemap.js
+		//resetDrop();
+		$(".span6 .btn-large").css("display", "none");
+		
 	}
+	
+	isMap = !isMap;
+
 
 }
 
