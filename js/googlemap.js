@@ -1,6 +1,7 @@
 var map;
 
 var markers = [];
+var racks = [];
 var iterator = 0;
 
 var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
@@ -149,6 +150,16 @@ function toggleBounce(id) {
   
 }
 
+function showRackState(id){
+  
+
+   jQuery.get('/racks/'+racks[id].rid, function(response) {    
+    //response.data
+    $("#bar-free").width(response.data.free_count+"%");
+    $("#bar-rest").width(response.data.total_count-response.data.free_count+"%");    
+  });
+}
+
 // Sets the map on all markers in the array.
 function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
@@ -170,6 +181,7 @@ function showMarkers() {
 function deleteMarkers() {
   clearMarkers();
   markers = [];
+  racks = [];
 }
 
 /*
@@ -186,7 +198,10 @@ function setTrAvailable(trId){
 function resetDrop(){
   jQuery.get('/racks', function(response) {
     for(var i = 0; i < response.data.length; i++){
+      racks.push(response.data[i]);
+
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+
     }
     deleteMarkers();
     drop();
