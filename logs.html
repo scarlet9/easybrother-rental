@@ -132,8 +132,8 @@
 			<h3>
 				사용 이력
 			</h3>
-			<button class="btn btn-block btn-large">사용 이력 보기</button>
-			<table id="log-table" class="table table-bordered">
+			<button id="log-table-show" class="btn btn-block btn-large" style="display:none">사용 이력 보기</button>
+			<table id="log-table" class="table table-bordered" style="display:none">
 				<thead>
 					<tr>
 						<th>
@@ -143,36 +143,21 @@
 							대여한 장소
 						</th>
 						<th>
-							대여 날짜
+							대여 시간
 						</th>
 						<th>
 							상태
 						</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							정문 거치대
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							반납 완료
-						</td>
-					</tr>
-				</tbody>
+				<tbody></tbody>
 			</table>
 		</div>
 	</div>
 	<script type="text/javascript">
 (function($, gBrowser) {
-	// Mobile only styles.
 	if (gBrowser.mobile) {
+		// Mobile only styles.
 		$('#modal-cancel').addClass('btn-block').addClass('btn-large');
 	}
 
@@ -180,20 +165,48 @@
 
 	// Get Racks information.
 	$.get('/racks', function(response) {
-		if (response.status >= 0) {
-			var racks = response.data;
-			$.get('/logs/fetch', function(response) {
-				if (response >= 0) {
-					var logs = response.data;
+		var racks = response.data;
+		$.get('/logs/fetch', function(response) {
+			var logs = response.data;
 
-					// All data fetched. Render a table.
+			// All data fetched. Render a table.
+			var $tbody = $('#log-table > tbody');
+			for (var i = 0; i < logs.length; i++) {
+				$tr = $('<tr />');
+				$tr.append($('<td />').text(logs[i].lid));
+				$tr.append($('<td />').text(racks[logs[i].rack_start - 1].name));
+				$tr.append($('<td />').text((logs[i].time_start === "0000-00-00 00:00:00")? "" : logs[i].time_start));
+				$tr.append($('<td />').text(state_string[logs[i].state]));
+				$tr.addClass('log-state-' + logs[i].state.toString());
 
+				$tr.appendTo($tbody);
+
+				if (logs[i].state === "1") {
+					// Has reserved bicycle. Display cancel menu.
+					$('#modal-cancel-zone').show();
 				}
-			});
-		}
-		else {
-			alert('정보 요청에 실패했습니다. 다시 시도해주세요.');
-		}
+
+				else if (logs[i].state === "2") {
+					// Has using bicycle. Display return menu. 
+					$('#modal-return-zone').show();
+
+					if (!gBrowser.mobile) {
+						$('#return-alert').show();
+					}
+				}
+			}
+
+			// Render now or deferred.
+			if (gBrowser.mobile) {
+				$('#log-table-show').show().click(function() {
+					$(this).hide();
+					$('#log-table').show();
+				});
+			}
+			else {
+				$('#log-table').show();
+			}
+		});
 	});
 })(jQuery, gBrowser);
 	</script>
