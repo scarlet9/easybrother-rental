@@ -209,7 +209,7 @@ class Rent {
 		}
 		else {
 			// Remove bicycle from the rack.
-			getDatabase()->execute('UPDATE `bicycle` SET `rack` = NULL WHERE `bid` = :bid LIMIT 1', 
+			getDatabase()->execute('UPDATE `bicycle` SET `current_rack` = NULL WHERE `bid` = :bid LIMIT 1', 
 				array(':bid' => $occupied['bid'])
 			);
 
