@@ -163,7 +163,7 @@ class Rent {
 		}
 
 		// Check whether this user already had a bicycle reserved or on use.
-		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` <= 2', array(':uid', $uid));
+		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` <= 2', array(':uid' => $uid));
 		if ($occupied) {
 			return error('User already has reserved bicycle or is using bicycle.', 403);
 		}
@@ -199,7 +199,7 @@ class Rent {
 		$uid = getSession()->get('uid');
 
 		// Check whether this user already had a bicycle reserved or on use.
-		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` <= 2', array(':uid', $uid));
+		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` <= 2', array(':uid' => $uid));
 		if (!$occupied) {
 			return error('User doesn\'t have a reserved bicycle.', 404);
 		}
@@ -231,7 +231,7 @@ class Rent {
 		}
 
 		// Check whether this user already had a bicycle reserved or on use.
-		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` = 2', array(':uid', $uid));
+		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` = 2', array(':uid' => $uid));
 		if (!$occupied) {
 			return error('User doesn\'t have a using bicycle.', 404);
 		}
@@ -255,7 +255,7 @@ class Rent {
 		$uid = getSession()->get('uid');
 
 		// Check whether this user already had a bicycle reserved or on use.
-		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` <= 2', array(':uid', $uid));
+		$occupied = getDatabase()->one('SELECT * FROM `log` WHERE `uid` = :uid AND `state` <= 2', array(':uid' => $uid));
 		if (!$occupied) {
 			return error('User doesn\'t have a reserved bicycle.', 404);
 		}
