@@ -99,7 +99,7 @@ function drop() {
   for (var i = 0; i < neighborhoods.length; i++) {    
     
     setTimeout(function() {
-      addMarker2(id);
+      addMarker2(i);
     }, i * 200);
     
     
@@ -125,7 +125,7 @@ function addMarker() {
 
 function addMaker2(id) {
   var marker = new google.maps.Marker({
-    position: neighborhoods[iterator],
+    position: neighborhoods[id],
     map: map,
     draggable: false,
     animation: google.maps.Animation.DROP
