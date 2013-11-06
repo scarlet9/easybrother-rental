@@ -286,7 +286,10 @@ function reservationIm(){
 		$.post('/bicycle/get', function(response) {
 			alert('대여에 성공하였습니다. 1시간 내로 거치대에 반납해주세요.');
 		})
-		.fail(fail_func);
+		.fail(function(jqxhr) {
+			// Fail.
+			alert(jqxhr.responseJSON.data);
+		});
 	}, 'json')
 	.fail(function(jqxhr) {
 			// Fail.
