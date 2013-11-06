@@ -71,28 +71,7 @@ $(function(){
 	});
 
 	$( "#btn-reserve" ).click(function() {
-		console.log("start");
-		if (currentRid == -1) {			
-			console.log("rid error");
-			return false;
-		} 
-		console.log(currentRid);
-		$.post('/bicycle/reserve',
-		{
-			'rid' : ''+currentRid
-		},
-		function(response) {		
-			// Success!				
-			window.localStorage.setItem('lastRackHistory', currentRid);
-			//location.href = '/reservation';
-			showRackState(currentRid);
-		}, 'json')
-		.fail(function(jqxhr) {
-				// Fail.
-				alert(jqxhr.responseJSON.data);
-		});
-		
-		return false;
+		reservationClick();
 	});
 
 
@@ -227,8 +206,8 @@ function geo_error() {
 
 var geo_options = {
 	enableHighAccuracy: true, 
-	maximumAge        : 70000, 
-	timeout           : 30000
+	maximumAge        : 30000, 
+	timeout           : 27000
 };
 
 function geo_success_now(latit, longi) {	
@@ -255,10 +234,35 @@ function geo_success_now(latit, longi) {
 		}
 
 		currentRid = rTemp[minIndex];
-		
-		$( "#btn-reserve" ).click();
+		reservationClick();
 
   	});
 
+
+}
+
+function reservationClick(){
+	console.log("start");
+	if (currentRid == -1) {			
+		console.log("rid error");
+		return false;
+	} 
+	console.log(currentRid);
+	$.post('/bicycle/reserve',
+	{
+		'rid' : ''+currentRid
+	},
+	function(response) {		
+		// Success!				
+		window.localStorage.setItem('lastRackHistory', currentRid);
+		//location.href = '/reservation';
+		showRackState(currentRid);
+	}, 'json')
+	.fail(function(jqxhr) {
+			// Fail.
+			alert(jqxhr.responseJSON.data);
+	});
+	
+	return false;
 
 }
