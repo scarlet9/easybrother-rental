@@ -4,6 +4,7 @@ var neighborsTemp = [];
 var racksTemp = [];
 var isMap = false;
 var wpid = -1;
+var lastRackId = -1;
 $(function(){
 
 	
