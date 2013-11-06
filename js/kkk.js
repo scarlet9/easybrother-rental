@@ -71,11 +71,12 @@ $(function(){
 	});
 
 	$( "#btn-reserve" ).click(function() {
+		console.log("start");
 		if (currentRid == -1) {			
 			console.log("rid error");
 			return false;
 		} 
-		
+		console.log(currentRid);
 		$.post('/bicycle/reserve',
 		{
 			'rid' : ''+currentRid
@@ -254,10 +255,7 @@ function geo_success_now(latit, longi) {
 		}
 
 		currentRid = rTemp[minIndex];
-		console.log(nTemp);
-		console.log(rTemp);
-		console.log(currentLocation);
-		console.log(currentRid);
+		
 		$( "#btn-reserve" ).click();
 
   	});
