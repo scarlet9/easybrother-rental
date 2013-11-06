@@ -123,7 +123,7 @@ function addMarker() {
   iterator++;
 }
 
-function addMaker2(id) {
+function addMarker2(id) {
   var marker = new google.maps.Marker({
     position: neighborhoods[id],
     map: map,
