@@ -42,9 +42,12 @@ $(function(){
 	
 	$( "#btn-lastRackHistory" ).click(function() {		
 		initReserveView();
-		// this function is in googlemap.js
-		if(window.localStorage.getItem('lastRackHistory') > -1){
+		
+		if(!(window.localStorage.getItem('lastRackHistory') == "" || 
+			window.localStorage.getItem('lastRackHistory') == null)){
+			// this function is in googlemap.js
 			showRackState(window.localStorage.getItem('lastRackHistory'));
+			oneRackOnMap(window.localStorage.getItem('lastRackHistory'));
 		}
 	});
 	

@@ -162,6 +162,8 @@ function showRackState(id){
   });
 }
 
+
+
 // Sets the map on all markers in the array.
 function setAllMap(map) {
   for (var i = 0; i < markers.length; i++) {
@@ -205,6 +207,15 @@ function resetDrop(){
     drop();  
   });  
   
+}
+
+function oneRackOnMap(id){
+  deleteMarkers();
+  jQuery.get('/racks/'+racks[id], function(response) {    
+    racks.push(response.data.rid);
+    neighborhoods.push(new google.maps.LatLng(response.data.latitude, response.data.longitude));
+    drop();
+  });
 }
 
 function calcDistance(p1, p2){
