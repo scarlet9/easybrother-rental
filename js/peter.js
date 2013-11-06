@@ -12,6 +12,10 @@
 			},
 			function(response) {
 				// Success!
+				
+				if (gBrowser.localstorage) {
+					window.localStorage.setItem('school_id', $('#inputStudentNum').val());
+				}
 				location.href = '/';
 			}, 'json')
 			.fail(function(jqxhr) {
@@ -21,5 +25,13 @@
 			
 			return false;
 		});
+
+		if (gBrowser.localstorage) {
+			var saved = window.localStorage.getItem('school_id');
+			if (saved) {
+				$('#inputStudentNum').val(saved);
+				$('.form-horizontal').submit();
+			}
+		}
 	});
 })(jQuery);

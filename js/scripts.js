@@ -16,6 +16,9 @@
 		// Bind login button at global menu.
 		$('#logout-btn').click(function(){
 			$.post('/user/logout', function(response) {
+				if (gBrowser.localstorage) {
+					window.localStorage.removeItem('school_id');
+				}
 				location.href = '/';
 			});
 		});
