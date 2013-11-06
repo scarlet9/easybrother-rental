@@ -52,7 +52,33 @@ $(function(){
 	});
 
 	$( "#btn-reserve" ).click(function() {
-		clickResereBtn();
+		if (currentRid == -1) {			
+			console.log("rid error");
+			return false;
+		}
+		
+		$.post('/bicycle/reserve',
+		{
+			'rid' : ''+currentRid
+		},
+		function(response) {
+			if (response.status === 0) {
+				// Success!
+				//console.log(response.data);
+				//alert(JSON.stringify(response.data));
+				window.localStorage.setItem('lastRackHistory', currentRid);
+
+				location.href = '/reservation';
+				//var term = $('#inputStudentNum').val();
+
+			}
+			else {
+				// Fail.
+				alert(response.data);
+			}
+		}, 'json');
+		
+		return false;
 	});
 
 
@@ -119,32 +145,6 @@ function initReserveView(){
 }
 
 function clickResereBtn(){
-	if (currentRid == -1) {			
-		console.log("rid error");
-		return false;
-	}
 	
-	$.post('/bicycle/reserve',
-	{
-		'rid' : ''+currentRid
-	},
-	function(response) {
-		if (response.status === 0) {
-			// Success!
-			//console.log(response.data);
-			//alert(JSON.stringify(response.data));
-			window.localStorage.setItem('lastRackHistory', currentRid);
-
-			location.href = '/reservation';
-			//var term = $('#inputStudentNum').val();
-
-		}
-		else {
-			// Fail.
-			alert(response.data);
-		}
-	}, 'json');
-	
-	return false;
 }
 
