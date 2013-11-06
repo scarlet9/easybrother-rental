@@ -199,9 +199,9 @@ function resetDrop(){
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 
     }   
-    
+    drop();  
   });  
-  drop();
+  
 }
 
 function calcDistance(p1, p2){
