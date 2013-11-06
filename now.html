@@ -75,18 +75,30 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span6">
-			<button type="button" class="btn btn-large btn-block btn-success disabled" disabled="disabled">예약 자전거 대여</button>
+			<button id="get-reserved" type="button" class="btn btn-large btn-block btn-success disabled" disabled="disabled">예약 자전거 대여</button>
 			<p></p>
 		</div>
 		<div class="span6">
-			<button type="button" class="btn btn-large btn-block btn-danger disabled" disabled="disabled">가까운 거치대에서 즉시 대여</button>
+			<button id="get-new" type="button" class="btn btn-large btn-block btn-danger disabled" disabled="disabled">가까운 거치대에서 즉시 대여</button>
 			<p></p>
 		</div>
 	</div>
 	<script type="text/javascript">
 (function($, gBrowser) {
+	var fail_func = function(jqxhr) {
+		alert(jqxhr.responseJSON.data);
+	};
+
 	if (gBrowser.mobile && gBrowser.geo) {
 		$('button.btn').removeClass('disabled').removeAttr('disabled');
+		$('#get-reserved').click(function() {
+			$.post('/bicycle/get', function(response) {
+				alert('대여에 성공하였습니다. 1시간 내로 거치대에 반납해주세요.');
+			})
+			.fail(fail_func);
+		});
+		$('#get-new').click(function() {
+		});
 	}
 })(jQuery, gBrowser);
 	</script>
