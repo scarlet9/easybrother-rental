@@ -7,7 +7,7 @@ var iterator = 0;
 var mapCenter = new google.maps.LatLng(37.38519648783452, 126.66671991348267);
 
 
-
+var currentRid = -1;
 
 var neighborhoods = [];
 
@@ -44,21 +44,9 @@ function initialize() {
   
   $("#map-canvas").css("visibility", "hidden");
   $("#btn-back").css("visibility", "hidden");
-  /*
-  $("#tr0 td:nth-child(3) button").click(function(){    
-    setTrDisable(0);
-  });
-  $("#tr1 td:nth-child(3) button").click(function(){    
-    setTrDisable(1);
-  });
-  $("#tr2 td:nth-child(3) button").click(function(){    
-    setTrDisable(2);
-  });
-  $("#tr3 td:nth-child(3) button").click(function(){    
-    setTrDisable(3);
-  });
-  */
-  drop();
+  
+ 
+  
 }
 
 
@@ -109,7 +97,7 @@ function nearStationDrop() {
 function drop() {
   
   for (var i = 0; i < neighborhoods.length; i++) {    
-    
+
     setTimeout(function() {
       addMarker();
     }, i * 200);
@@ -128,11 +116,13 @@ function addMarker() {
   });
   google.maps.event.addListener(marker, 'click', function(e) {
     toggleBounce(id);
+    showRackState(id);
   });
   markers.push(marker);
   
   iterator++;
 }
+
 
 function toggleBounce(id) {
   
@@ -153,10 +143,22 @@ function toggleBounce(id) {
 function showRackState(id){
   
 
-   jQuery.get('/racks/'+racks[id].rid, function(response) {    
+   jQuery.get('/racks/'+racks[id], function(response) {    
     //response.data
-    $("#bar-free").width(response.data.free_count+"%");
-    $("#bar-rest").width(response.data.total_count-response.data.free_count+"%");    
+    var free = response.data.free_count/response.data.total_count;
+    var rest = 1 - free;
+
+    $("#bar-free").width(100*free+"%");
+    $("#bar-rest").width(100*rest+"%");
+
+    if(response.data.free_count > 0){
+      $( "#btn-reserve").removeClass("disabled");
+    } else {
+      $( "#btn-reserve").addClass("disabled");
+    }
+
+    $("#locationInfo").text(response.data.name);
+    currentRid = racks[id];
   });
 }
 
@@ -182,30 +184,27 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
   racks = [];
-}
+  neighborhoods = [];
+  // 이 변수 때문에 고생할 일이 많아질거 같다
+  // 반드시 이거 관련해서 수정해야 하는데 시간이 ㅠㅠ 
+  iterator = 0;
 
-/*
-
-function setTrAvailable(trId){
-  $("#tr" + trId).removeClass("error").addClass("success");
-  $("#tr" + trId + " td:nth-child(2)").text("Avalable");
-  $("#tr" + trId + " td:nth-child(3) button").css("visibility","visible");
 }
-*/
 
 
 
 function resetDrop(){
+  deleteMarkers();
   jQuery.get('/racks', function(response) {
-    for(var i = 0; i < response.data.length; i++){
-      racks.push(response.data[i]);
 
+    for(var i = 0; i < response.data.length; i++){
+      racks.push(response.data[i].rid);      
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 
-    }
-    deleteMarkers();
-    drop();
+    }   
+    drop();  
   });  
+  
 }
 
 function calcDistance(p1, p2){

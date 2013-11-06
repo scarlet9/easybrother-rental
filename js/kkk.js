@@ -30,21 +30,58 @@ $(function(){
 	}
 
 	$( "#btn-findmap" ).click(function() {
-		setButtons();		
-
+		setButtons();
+		initReserveView();
 	});
 
 	$( "#btn-back" ).click(function() {
-		setButtons();		
-
+		setButtons();
+		initReserveView();
 	});
 	
+	$( "#btn-lastRackHistory" ).click(function() {		
+		initReserveView();
+	});
+	
+	$( "#btn-nearestRack" ).click(function() {		
+		initReserveView();
+	});
+
+	$( "#btn-reserve" ).click(function() {
+		if (currentRid == -1) {			
+			console.log("rid error");
+			return false;
+		}
+		
+		$.post('/bicycle/reserve',
+		{
+			'rid' : currentRid
+		},
+		function(response) {
+			if (response.status === 0) {
+				// Success!
+				//console.log(response.data);
+				//alert(JSON.stringify(response.data));
+				location.href = '/reservation';
+				//var term = $('#inputStudentNum').val();
+			}
+			else {
+				// Fail.
+				alert(response.data);
+			}
+		}, 'json');
+		
+		return false;
+	});
+
+
 	if(window.localStorage.getItem('lastRackHistory') === null){
 		$( "#btn-lastRackHistory").addClass("disabled");
 	} else {
 		$( "#btn-lastRackHistory").removeClass("disabled");
 	}
 
+	
 });
 
 var dayByday = true;
@@ -68,6 +105,8 @@ function setButtons(){
 	}
 	
 	isMap = !isMap;
+
+
 }
 
 function setDay(){
@@ -88,5 +127,13 @@ function setToday(){
 function setTomorrow(){
 	$( "#day" ).text("Tomorrow");
 	dayByday = false;	
+}
+
+function initReserveView(){
+	$( "#btn-reserve").addClass("disabled");
+	$( "#bar-free").width("0%");
+	$( "#bar-rest").width("0%");
+	$("#locationInfo").text("");
+	currentRid = -1;
 }
 
