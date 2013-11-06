@@ -4,7 +4,7 @@ var neighborsTemp = [];
 var racksTemp = [];
 var isMap = false;
 var wpid = -1;
-var lastRackId = -1;
+var lastRackId = -2;
 $(function(){
 
 	
@@ -193,10 +193,14 @@ function calcDistance(p1, p2){
 function geo_success(position) {
 	
 	var minRackId = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
-	if(minRackId > -1){
-		showRackState(minRackId);
-		oneRackOnMap(minRackId);	
+	if(minRackId != lastRackId){
+		if(minRackId > -1){
+			lastRackId = minRackId;
+			showRackState(minRackId);
+			oneRackOnMap(minRackId);
+		}	
 	}
+	
 	
 
 }
