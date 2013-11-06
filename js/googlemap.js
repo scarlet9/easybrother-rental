@@ -199,7 +199,7 @@ function resetDrop(){
   jQuery.get('/racks', function(response) {
     for(var i = 0; i < response.data.length; i++){
       racks.push(response.data[i]);
-
+      alert(response.data[i]);
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 
     }
