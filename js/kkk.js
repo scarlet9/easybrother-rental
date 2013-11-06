@@ -164,11 +164,11 @@ function nearestNeighborhood(latit, longi){
    
 	var currentLocation = new google.maps.LatLng(latit, longi);
 	
-	var minValue = calcDistance(currentLocation, nighborhoods[0]);
+	var minValue = calcDistance(currentLocation, neighborhoods[0]);
 	var minIndex = 0;
 
 	for(var i = 1; i < neighborhoods.length; i++) {    
-		var result = calcDistance(currentLocation, nighborhoods[i]);
+		var result = calcDistance(currentLocation, neighborhoods[i]);
 		if(minValue > result){
 			minValue = result;
 			minIndex = i;
