@@ -42,7 +42,7 @@ function initialize() {
 
   // table setting
   
-  $("#map-canvas").css("visibility", "hidden");
+  //$("#map-canvas").css("visibility", "hidden");
   $("#btn-back").css("visibility", "hidden");
   
  

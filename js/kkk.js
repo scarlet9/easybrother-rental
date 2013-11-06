@@ -30,7 +30,8 @@ $(function(){
 	}
 
 	$( "#btn-findmap" ).click(function() {
-		setButtons();
+		//setButtons();
+		resetDrop();
 		initReserveView();
 	});
 
@@ -54,6 +55,8 @@ $(function(){
 	$( "#btn-reserve" ).click(function() {
 		if (currentRid == -1) {			
 			console.log("rid error");
+			return false;
+		} else if( $( "#btn-reserve" ).hasClass( "disabled") ) {
 			return false;
 		}
 		
