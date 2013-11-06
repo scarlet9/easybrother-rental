@@ -185,10 +185,10 @@ class Rent {
 				// Leave a log of reservation.
 				getDatabase()->execute('INSERT INTO `log` (`uid`, `bid`, `rack_start`, `time_reserved`, `state`) 
 					VALUES (:uid, :bid, :rack_start, NOW(), :state)',
-					array(':uid' => $uid, ':bid' => $bicycle['bid'], ':rack_start' => $bicycle['rid'], ':state' => 1)
+					array(':uid' => $uid, ':bid' => $bicycle['bid'], ':rack_start' => $rid, ':state' => 1)
 				);
 
-				return with_status(array('rid' => $bicycle['rid'], 'bid' => $bicycle['bid']));
+				return with_status(array('rid' => $rid, 'bid' => $bicycle['bid']));
 			}
 			else {
 				// Someone took that bicycle. Retry.
