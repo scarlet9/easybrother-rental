@@ -214,6 +214,7 @@ function oneRackOnMap(id){
   jQuery.get('/racks/'+id, function(response) {    
     racks.push(response.data.rid);
     neighborhoods.push(new google.maps.LatLng(response.data.latitude, response.data.longitude));
+    map.setCenter(neighborhoods[0]);
     drop();
   });
 }

@@ -45,7 +45,7 @@ $(function(){
 		
 		if(!(window.localStorage.getItem('lastRackHistory') == "" || 
 			window.localStorage.getItem('lastRackHistory') == null)){
-			// this function is in googlemap.js
+			// these functions are in googlemap.js
 			showRackState(window.localStorage.getItem('lastRackHistory'));
 			oneRackOnMap(window.localStorage.getItem('lastRackHistory'));
 		}
