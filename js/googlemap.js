@@ -148,44 +148,31 @@ function toggleBounce(id) {
 
   
 }
-/*
-function setReservationTable(id){
-  switch(id){
-    case 0:
-      setTrAvailable(0);
-      setTrDisable(1);
-      setTrAvailable(2);
-      setTrDisable(3);
 
-    break;
-    case 1:
-      setTrDisable(0);
-      setTrDisable(1);
-      setTrDisable(2);
-      setTrDisable(3);
-    break;
-    case 2:
-      setTrAvailable(0);
-      setTrAvailable(1);
-      setTrAvailable(2);  
-      setTrAvailable(3);
-    break;
-    case 3:
-      setTrDisable(0);
-      setTrAvailable(1);
-      setTrDisable(2);
-      setTrAvailable(3);
-      
-    break;
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
   }
 }
 
-function setTrDisable(trId){
-  $("#tr" + trId).removeClass("success").addClass("error");
-  $("#tr" + trId + " td:nth-child(2)").text("Disable");
-  $("#tr" + trId + " td:nth-child(3) button").css("visibility","hidden");  
-
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setAllMap(null);
 }
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setAllMap(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+
+/*
 
 function setTrAvailable(trId){
   $("#tr" + trId).removeClass("error").addClass("success");
@@ -194,13 +181,17 @@ function setTrAvailable(trId){
 }
 */
 
-jQuery.get('/racks', function(response) {
-  for(var i = 0; i < response.data.length; i++){
-    neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
-  }
 
-  drop();
-});
+
+function resetDrop(){
+  jQuery.get('/racks', function(response) {
+    for(var i = 0; i < response.data.length; i++){
+      neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+    }
+    deleteMarkers();
+    drop();
+  });  
+}
 
 function calcDistance(p1, p2){
   //return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);

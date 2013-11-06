@@ -46,16 +46,17 @@ var time = 0;
 
 function setButtons(){
 	if(isMap){
-		//$("#btn-back").css("display", "none");
+		
 		$("#btn-back").css("visibility","hidden");
 		$("#map-canvas").css("visibility","hidden");
-		//$("#map-canvas").css("display", "none");			
+		// this function is in googlemap.js
+		resetDrop();
 		$(".span6 .btn-large").css("display", "inline");
 	} else {
-		//$("#btn-back").css("display", "inline");
+		
 		$("#btn-back").css("visibility","visible");
 		$("#map-canvas").css("visibility","visible");
-		//$("#map-canvas").css("display", "inline");
+		
 		$(".span6 .btn-large").css("display", "none");
 		
 	}
