@@ -13,19 +13,10 @@ var neighborhoods = [];
 
 
 
-  
+
 function initialize() {
   
-  if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-          //alert('it works');
-      }, function(error) {
-          //alert('Error occurred. Error code: ' + error.code);         
-      },{timeout:50000});
-  }else{
-      alert('no geolocation support');
-  }
-    
+     
   var mapOptions = {
     zoom: 16,
     center: mapCenter,
@@ -62,23 +53,7 @@ function placeMarker(position, map) {
   map.panTo(position);
 }
 
-function nearestNeighborhood(){
-    
-  var maxIndex = 0;
-  var maxValue = 0;
-  
 
-  for(var i = 0; i < neighborhoods.length; i++) {    
-    var result = calcDistance(mapCenter, nighborhoods[i]);
-    if(maxValue < result){
-      maxValue = result;
-      maxIndex = i;
-    }
-  }
-  
-  return neighborhoods[i];
-  
-}
 
 function nearStationDrop() {
   var realCount = 0;
@@ -198,7 +173,7 @@ function deleteMarkers() {
 function resetDrop(){
   deleteMarkers();
   jQuery.get('/racks', function(response) {
-
+    map.setCenter(mapCenter);
     for(var i = 0; i < response.data.length; i++){
       racks.push(response.data[i].rid);      
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
@@ -209,16 +184,13 @@ function resetDrop(){
   
 }
 
-function resetDrop(id){
+function oneRackOnMap(id){
   deleteMarkers();
   jQuery.get('/racks/'+id, function(response) {    
     racks.push(response.data.rid);
     neighborhoods.push(new google.maps.LatLng(response.data.latitude, response.data.longitude));
+    map.setCenter(neighborhoods[0]);
     drop();
   });
 }
 
-function calcDistance(p1, p2){
-  //return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
-  return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
-}

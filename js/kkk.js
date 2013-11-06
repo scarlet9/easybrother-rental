@@ -1,6 +1,6 @@
 // kkk.js
 var isMap = false;
-
+var wpid;
 $(function(){
 
 	
@@ -45,14 +45,24 @@ $(function(){
 		
 		if(!(window.localStorage.getItem('lastRackHistory') == "" || 
 			window.localStorage.getItem('lastRackHistory') == null)){
-			// this function is in googlemap.js
+			// these functions are in googlemap.js
 			showRackState(window.localStorage.getItem('lastRackHistory'));
-			resetDrop(window.localStorage.getItem('lastRackHistory'));
+			oneRackOnMap(window.localStorage.getItem('lastRackHistory'));
 		}
 	});
 	
 	$( "#btn-nearestRack" ).click(function() {		
 		initReserveView();
+		deleteMarkers();
+		jQuery.get('/racks', function(response) {		    
+		    for(var i = 0; i < response.data.length; i++){
+		    	racks.push(response.data[i].rid);      
+		    	neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+		    }   
+		    
+	  	});
+
+	  	wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
 	});
 
 	$( "#btn-reserve" ).click(function() {
@@ -138,6 +148,7 @@ function setTomorrow(){
 }
 
 function initReserveView(){
+	navigator.geolocation.clearWatch(wpid);
 	$( "#btn-reserve").addClass("disabled");
 	$( "#bar-free").width("0%");
 	$( "#bar-rest").width("0%");
@@ -149,3 +160,44 @@ function clickResereBtn(){
 	
 }
 
+function nearestNeighborhood(latit, longi){
+   
+	var currentLocation = new google.maps.LatLng(latit, longi);
+	
+	var minValue = calcDistance(currentLocation, neighborhoods[0]);
+	var minIndex = 0;
+
+	for(var i = 1; i < neighborhoods.length; i++) {    
+		var result = calcDistance(currentLocation, neighborhoods[i]);
+		if(minValue > result){
+			minValue = result;
+			minIndex = i;
+		}
+	}
+
+return minIndex;
+  
+}
+
+function calcDistance(p1, p2){
+	//return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+	return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+}
+
+
+function geo_success(position) {
+	var minIndex = nearestNeighborhood(position.coords.latitude, position.coords.longitude);
+
+	oneRackOnMap(minIndex);
+
+}
+
+function geo_error() {
+	alert("위치 정보를 사용할 수 없습니다.");
+}
+
+var geo_options = {
+	enableHighAccuracy: true, 
+	maximumAge        : 30000, 
+	timeout           : 27000
+};
