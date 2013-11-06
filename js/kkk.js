@@ -114,6 +114,7 @@ function setButtons(){
 		$("#div-time").css("visibility", "hidden");
 		$("#div-day").css("visibility", "hidden");
 		$("#div-probar").css("visibility", "hidden");
+		$("#btn-reserve").css("visibility", "hidden");
 
 		$(".span6 .btn-large").css("display", "inline");
 	} else {
@@ -123,6 +124,7 @@ function setButtons(){
 		$("#div-time").css("visibility", "visible");
 		$("#div-day").css("visibility", "visible");
 		$("#div-probar").css("visibility", "visible");
+		$("#btn-reserve").css("visibility", "visible");
 		// this function is in googlemap.js
 		//resetDrop();
 		$(".span6 .btn-large").css("display", "none");
