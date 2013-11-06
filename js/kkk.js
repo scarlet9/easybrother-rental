@@ -68,7 +68,8 @@ $(function(){
 				//alert(JSON.stringify(response.data));
 				window.localStorage.setItem('lastRackHistory', currentRid);
 
-				location.href = '/reservation';
+				//location.href = '/reservation';
+				showRackState(currentRid);
 				//var term = $('#inputStudentNum').val();
 
 			}
@@ -82,10 +83,10 @@ $(function(){
 	});
 
 
-	if(window.localStorage.getItem('lastRackHistory') === null){
-		$( "#btn-lastRackHistory").addClass("disabled");
+	if(window.localStorage.getItem('lastRackHistory') > -1){
+		$( "#btn-lastRackHistory").removeClass("disabled");		
 	} else {
-		$( "#btn-lastRackHistory").removeClass("disabled");
+		$( "#btn-lastRackHistory").addClass("disabled");
 	}
 
 	
