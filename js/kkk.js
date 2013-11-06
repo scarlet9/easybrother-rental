@@ -49,13 +49,14 @@ function setButtons(){
 		
 		$("#btn-back").css("visibility","hidden");
 		$("#map-canvas").css("visibility","hidden");
-		// this function is in googlemap.js
-		resetDrop();
+		
 		$(".span6 .btn-large").css("display", "inline");
 	} else {
 		
 		$("#btn-back").css("visibility","visible");
 		$("#map-canvas").css("visibility","visible");
+		// this function is in googlemap.js
+		resetDrop();
 		
 		$(".span6 .btn-large").css("display", "none");
 		
