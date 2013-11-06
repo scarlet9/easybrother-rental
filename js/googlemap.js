@@ -153,7 +153,7 @@ function toggleBounce(id) {
 function showRackState(id){
   
 
-   jQuery.get('/racks/'+racks[id].rid, function(response) {    
+   jQuery.get('/racks/'+racks[id], function(response) {    
     //response.data
     $("#bar-free").width(response.data.free_count+"%");
     $("#bar-rest").width(response.data.total_count-response.data.free_count+"%");    
@@ -198,8 +198,7 @@ function setTrAvailable(trId){
 function resetDrop(){
   jQuery.get('/racks', function(response) {
     for(var i = 0; i < response.data.length; i++){
-      racks.push(response.data[i]);
-      alert(response.data[i]);
+      racks.push(response.data[i].rid);      
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 
     }
