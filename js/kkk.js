@@ -234,7 +234,7 @@ function geo_success_now(latit, longi) {
 		}
 
 		currentRid = rTemp[minIndex];
-		reservationClick();
+		reservationIm();
 
   	});
 
@@ -242,12 +242,12 @@ function geo_success_now(latit, longi) {
 }
 
 function reservationClick(){
-	console.log("start");
+	
 	if (currentRid == -1) {			
 		console.log("rid error");
 		return false;
 	} 
-	console.log(currentRid);
+	
 	$.post('/bicycle/reserve',
 	{
 		'rid' : ''+currentRid
@@ -257,6 +257,35 @@ function reservationClick(){
 		window.localStorage.setItem('lastRackHistory', currentRid);
 		//location.href = '/reservation';
 		showRackState(currentRid);
+	}, 'json')
+	.fail(function(jqxhr) {
+			// Fail.
+			alert(jqxhr.responseJSON.data);
+	});
+	
+	return false;
+
+}
+
+function reservationIm(){
+
+	if (currentRid == -1) {			
+		console.log("rid error");
+		return false;
+	} 
+	
+	$.post('/bicycle/reserve',
+	{
+		'rid' : ''+currentRid
+	},
+	function(response) {		
+		// Success!				
+		window.localStorage.setItem('lastRackHistory', currentRid);
+		//location.href = '/reservation';
+		$.post('/bicycle/get', function(response) {
+			alert('대여에 성공하였습니다. 1시간 내로 거치대에 반납해주세요.');
+		})
+		.fail(fail_func);
 	}, 'json')
 	.fail(function(jqxhr) {
 			// Fail.
