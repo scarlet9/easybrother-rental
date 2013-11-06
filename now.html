@@ -94,7 +94,7 @@
 		alert(jqxhr.responseJSON.data);
 	};
 
-	if (gBrowser.mobile || gBrowser.geo) {
+	if (gBrowser.mobile && gBrowser.geo) {
 		$('button.btn').removeClass('disabled').removeAttr('disabled');
 		$('#get-reserved').click(function() {
 			$.post('/bicycle/get', function(response) {
