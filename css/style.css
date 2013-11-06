@@ -10,12 +10,33 @@
 	margin: 50px auto;
 }
 
-body#login-body {
+html {
+	height: 100%;
+	width: 100%;
 	background-image: url('../img/songdo.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 
-body#login-body > .container-fluid {
-	background: rgba(255,255,255,0.7);
+body {
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(255,255,255,0.6);
+	font-family: "Apple SD Gothic Neo", "나눔고딕", "NanumGothic", "맑은 고딕", "MalgunGothic";
+}
+
+body .container-fluid, body .container {
+	background: rgba(255,255,255,0.6);
+	height: 100%;
+	overflow: scroll;
+}
+
+body .row-fluid, body .row {
+	padding: 5%;
+	width: 90%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #172e6b;
 }
