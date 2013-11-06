@@ -55,7 +55,7 @@ $(function(){
 		
 		$.post('/bicycle/reserve',
 		{
-			'rid' : currentRid
+			'rid' : ''+currentRid
 		},
 		function(response) {
 			if (response.status === 0) {
