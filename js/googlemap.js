@@ -44,7 +44,7 @@ function initialize() {
   
   $("#map-canvas").css("visibility", "hidden");
   $("#btn-back").css("visibility", "hidden");
-  $( "#btn-reserve").addClass("disabled");
+  
  
   
 }
@@ -180,6 +180,7 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
   racks = [];
+  neighborhoods = [];
 }
 
 
