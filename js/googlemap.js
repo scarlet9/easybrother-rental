@@ -12,20 +12,11 @@ var currentRid = -1;
 var neighborhoods = [];
 
 
-
-  
+var wpid;
+var   
 function initialize() {
   
-  if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-          //alert('it works');
-      }, function(error) {
-          //alert('Error occurred. Error code: ' + error.code);         
-      },{timeout:50000});
-  }else{
-      alert('no geolocation support');
-  }
-    
+     
   var mapOptions = {
     zoom: 16,
     center: mapCenter,
@@ -46,7 +37,7 @@ function initialize() {
   $("#btn-back").css("visibility", "hidden");
   
  
-  
+  wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
 }
 
 
@@ -62,14 +53,14 @@ function placeMarker(position, map) {
   map.panTo(position);
 }
 
-function nearestNeighborhood(){
+function nearestNeighborhood(latit, longi){
     
   var maxIndex = 0;
   var maxValue = 0;
-  
+  var currentLocation = new google.maps.LatLng(latit, longi);
 
   for(var i = 0; i < neighborhoods.length; i++) {    
-    var result = calcDistance(mapCenter, nighborhoods[i]);
+    var result = calcDistance(currentLocation, nighborhoods[i]);
     if(maxValue < result){
       maxValue = result;
       maxIndex = i;
@@ -198,7 +189,7 @@ function deleteMarkers() {
 function resetDrop(){
   deleteMarkers();
   jQuery.get('/racks', function(response) {
-
+    map.setCenter(mapCenter);
     for(var i = 0; i < response.data.length; i++){
       racks.push(response.data[i].rid);      
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
@@ -223,3 +214,18 @@ function calcDistance(p1, p2){
   //return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
   return google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
 }
+
+
+function geo_success(position) {
+  do_something(position.coords.latitude, position.coords.longitude);
+}
+
+function geo_error() {
+  alert("위치 정보를 사용할 수 없습니다.");
+}
+
+var geo_options = {
+  enableHighAccuracy: true, 
+  maximumAge        : 30000, 
+  timeout           : 27000
+};
