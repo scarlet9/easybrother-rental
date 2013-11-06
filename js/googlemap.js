@@ -97,9 +97,9 @@ function nearStationDrop() {
 function drop() {
   
   for (var i = 0; i < neighborhoods.length; i++) {    
-    
+    var temp = i;
     setTimeout(function() {
-      addMarker2(i);
+      addMarker2(temp);
     }, i * 200);
     
     
