@@ -51,8 +51,8 @@
 			</p>
 		</div>
 		<div class="span4">
-			 <a href="/now" class="btn btn-large btn-block btn-success disabled" type="button">자전거 거치대 현황<br />Available Racks</a>
-			<p class="text-error text-center">
+			 <a id="button-to-now" href="/now" class="btn btn-large btn-block btn-success disabled" type="button">대여하기<br />Available Racks</a>
+			<p id="label-now-error" class="text-error text-center">
 				실시간 대여는 모바일에서만 가능합니다. 
 			</p>
 		</div>
@@ -96,6 +96,19 @@
 				<abbr title="Phone">P:</abbr><a href="tel:0221232173">(02)2123-2173</a></address>
 		</div>
 	</div>
+	<script type="text/javascript">
+(function($, gBrowser) {
+	if (gBrowser.mobile && gBrowser.geo) {
+		$('#button-to-now').removeClass('disabled');
+		$('#label-now-error').text('');
+	}
+	else {
+		$('#button-to-now').click(function(e) {
+			e.preventDefault();
+		})
+	}
+})(jQuery, gBrowser);
+	</script>
 </div>
 </body>
 </html>

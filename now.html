@@ -44,7 +44,7 @@
 									<a href="/reservation">예약하기</a>
 								</li>
 								<li class="active">
-									<a href="/now">거치대 현황</a>
+									<a href="/now">대여하기</a>
 								</li>
 								<li>
 									<a href="/logs">사용이력</a>
@@ -85,7 +85,7 @@
 	</div>
 	<script type="text/javascript">
 (function($, gBrowser) {
-	if (gBrowser.mobile && gBrowser.geolocation) {
+	if (gBrowser.mobile && gBrowser.geo) {
 		$('button.btn').removeClass('disabled').removeAttr('disabled');
 	}
 })(jQuery, gBrowser);
