@@ -181,6 +181,10 @@ function deleteMarkers() {
   markers = [];
   racks = [];
   neighborhoods = [];
+  // 이 변수 때문에 고생할 일이 많아질거 같다
+  // 반드시 이거 관련해서 수정해야 하는데 시간이 ㅠㅠ 
+  iterator = 0;
+
 }
 
 
@@ -193,10 +197,10 @@ function resetDrop(){
       racks.push(response.data[i].rid);      
       neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
 
-    }
+    }   
     
-    drop();
   });  
+  drop();
 }
 
 function calcDistance(p1, p2){
