@@ -18,8 +18,9 @@
 			$.post('http://bicycle.scarlet9.net/user/logout', function(response) {
 				if (gBrowser.localstorage) {
 					window.localStorage.removeItem('school_id');
+					window.localStorage.removeItem('logged');
 				}
-				location.href = '/';
+				location.href = 'login.html';
 			});
 		});
 		setTimeout(function() { window.scrollTo(0, 1); }, 1);

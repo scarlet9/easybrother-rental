@@ -5,6 +5,7 @@
 				alert('Please enter username!!');
 				return false;
 			}
+
 			
 			$.post('http://bicycle.scarlet9.net/user/login',
 			{
@@ -12,11 +13,12 @@
 			},
 			function(response) {
 				// Success!
-				
+
 				if (gBrowser.localstorage) {
 					window.localStorage.setItem('school_id', $('#inputStudentNum').val());
+					window.localStorage.setItem('logged', true);
 				}
-				location.href = '/';
+				location.href = 'index.html';
 			}, 'json')
 			.fail(function(jqxhr) {
 				// Fail.

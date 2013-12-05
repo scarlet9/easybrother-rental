@@ -27,6 +27,12 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+
+<script type="text/javascript">
+if (!window.localStorage.getItem('logged')) {
+	location.href = "login.html";
+}
+</script>
 </head>
 
 <body>
@@ -45,19 +51,19 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span4">
-			 <a href="/reservation.html" class="btn btn-block btn-large btn-info" type="button">예약하기<br />Reservation</a>
+			 <a href="reservation.html" class="btn btn-block btn-large btn-info" type="button">예약하기<br />Reservation</a>
 			<p class="muted text-center">
 				예약은 <strong>이용 시각 24시간 전</strong>부터 가능합니다. 
 			</p>
 		</div>
 		<div class="span4">
-			 <a id="button-to-now" href="/now.html" class="btn btn-large btn-block btn-success disabled" type="button">대여하기<br />Get Bicycle</a>
+			 <a id="button-to-now" href="now.html" class="btn btn-large btn-block btn-success disabled" type="button">대여하기<br />Get Bicycle</a>
 			<p id="label-now-error" class="text-error text-center">
 				실시간 대여는 모바일에서만 가능합니다. 
 			</p>
 		</div>
 		<div class="span4">
-			 <a href="/logs.html" class="btn btn-large btn-block btn-warning" type="button">내 사용이력 조회<br />Service Logs</a>
+			 <a href="logs.html" class="btn btn-large btn-block btn-warning" type="button">내 사용이력 조회<br />Service Logs</a>
 		</div>
 	</div>
 	<div class="row-fluid">
