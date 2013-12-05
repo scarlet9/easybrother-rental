@@ -54,8 +54,8 @@
 								<li>
 									<a href="logs.html">사용이력</a>
 								</li>
-								<li class="active">
-									<a href="fevertime.html">속도계</a>
+								<li>
+									<a href="Speedometer.html">속도계</a>
 								</li>
 								<li class="active">
 									<a href="fevertime.html">달려라 임마</a>
@@ -74,22 +74,37 @@
 					</div>
 				</div>
 			</div>
-			
+			<button class="btn btn-primary" type="button" id="remain">wait plz...</button>
+			<div id="map-canvas"></div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
 (function($, gBrowser) {
-	if (gBrowser.mobile) {
-		$("#map-canvas").css("visibility", "hidden");
-		$("#btn-back").css("visibility", "hidden");
-
-		$("#div-time").css("visibility", "hidden");
-		$("#div-day").css("visibility", "hidden");
-		$("#div-probar").css("visibility", "hidden");
-		$("#btn-reserve").css("visibility", "hidden");
+	
+	if(wpid > 0){
+		navigator.geolocation.clearWatch(wpid);
+		wpid = -1;
 	}
+
+	$("#remain").css("visibility", "hidden");
+	
+	$("#map-canvas").css("visibility", "visible");
+	
+	destinationDrop();
 })(jQuery, gBrowser);
+
+$( "#remain" ).click(function() {
+	
+	if(wpid > 0){
+		navigator.geolocation.clearWatch(wpid);
+		wpid = -1;
+	}
+
+	$("#remain").css("visibility", "hidden");
+	
+	$("#map-canvas").css("visibility", "visible");
+});
 </script>
 </body>
 </html>

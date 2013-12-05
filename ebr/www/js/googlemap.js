@@ -11,7 +11,7 @@ var currentRid = -1;
 
 var neighborhoods = [];
 
-
+var destination;
 
 
 function initialize() {
@@ -184,6 +184,8 @@ function resetDrop(){
   
 }
 
+
+
 function oneRackOnMap(id){
   deleteMarkers();
   jQuery.get('http://bicycle.scarlet9.net/racks/'+id, function(response) {    
@@ -192,5 +194,52 @@ function oneRackOnMap(id){
     map.setCenter(neighborhoods[0]);
     drop();
   });
+}
+
+function destinationDrop(){
+ deleteMarkers();
+  jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {
+    map.setCenter(mapCenter);
+    for(var i = 0; i < response.data.length; i++){
+      racks.push(response.data[i].rid);      
+      neighborhoods.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+
+    }   
+    for (var i = 0; i < neighborhoods.length; i++) {    
+
+    setTimeout(function() {
+      addDestination();
+    }, i * 200);
+    
+    
+  }
+  });  
+   
+}
+
+function addDestination() {  
+  var id = iterator;
+  var marker = new google.maps.Marker({
+    position: neighborhoods[iterator],
+    map: map,
+    draggable: false,
+    animation: google.maps.Animation.DROP
+  });
+  google.maps.event.addListener(marker, 'click', function(e) {
+    $("#remain").css("visibility", "visible");
+  
+    $("#map-canvas").css("visibility", "hidden");
+    destination = neighborhoods[id];
+    wpid = navigator.geolocation.watchPosition(dest_success, geo_error, geo_options);
+  });
+  markers.push(marker);
+  
+  iterator++;
+}
+
+function  dest_success(position){
+  var current = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  var result = calcDistance(destination, current);
+  $("#remain").text((result/1000).toFixed(2)+"km");
 }
 
