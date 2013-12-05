@@ -118,7 +118,7 @@ function toggleBounce(id) {
 function showRackState(id){
   
 
-   jQuery.get('/racks/'+id, function(response) {    
+   jQuery.get('http://bicycle.scarlet9.net/racks/'+id, function(response) {    
     //response.data
     var free = response.data.free_count/response.data.total_count;
     var rest = 1 - free;
@@ -172,7 +172,7 @@ function deleteMarkers() {
 
 function resetDrop(){
   deleteMarkers();
-  jQuery.get('/racks', function(response) {
+  jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {
     map.setCenter(mapCenter);
     for(var i = 0; i < response.data.length; i++){
       racks.push(response.data[i].rid);      
@@ -186,7 +186,7 @@ function resetDrop(){
 
 function oneRackOnMap(id){
   deleteMarkers();
-  jQuery.get('/racks/'+id, function(response) {    
+  jQuery.get('http://bicycle.scarlet9.net/racks/'+id, function(response) {    
     racks.push(response.data.rid);
     neighborhoods.push(new google.maps.LatLng(response.data.latitude, response.data.longitude));
     map.setCenter(neighborhoods[0]);

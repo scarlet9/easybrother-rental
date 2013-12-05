@@ -6,7 +6,7 @@
 				return false;
 			}
 			
-			$.post('/user/login',
+			$.post('http://bicycle.scarlet9.net/user/login',
 			{
 				'school_id' : $('#inputStudentNum').val()
 			},

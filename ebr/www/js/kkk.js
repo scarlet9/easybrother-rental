@@ -60,7 +60,7 @@ $(function(){
 		racksTemp = [];
 		neighborsTemp = [];
 		nrTempEnd = false;
-		jQuery.get('/racks', function(response) {		    
+		jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {		    
 		    for(var i = 0; i < response.data.length; i++){
 		    	racksTemp.push(response.data[i].rid);      
 		    	neighborsTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
@@ -218,7 +218,7 @@ var geo_options = {
 function geo_success_now(latit, longi) {	
 	var nTemp = [];
 	var rTemp = [];
-	jQuery.get('/racks', function(response) {
+	jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {
 	    for(var i = 0; i < response.data.length; i++){
 	    	rTemp.push(response.data[i].rid);      
 	    	nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
@@ -249,7 +249,7 @@ function geo_success_now(latit, longi) {
 function geo_success_logs(latit, longi, state_string){
 	var nTemp = [];
 	var rTemp = [];
-	jQuery.get('/racks', function(response) {
+	jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {
 	    for(var i = 0; i < response.data.length; i++){
 	    	rTemp.push(response.data[i].rid);      
 	    	nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
@@ -270,7 +270,7 @@ function geo_success_logs(latit, longi, state_string){
 		}
 
 		
-		$.post('/bicycle/return',
+		$.post('http://bicycle.scarlet9.net/bicycle/return',
 		{
 			'rid' : ''+rTemp[minIndex]
 		},
@@ -298,7 +298,7 @@ function reservationClick(){
 		return false;
 	} 
 	
-	$.post('/bicycle/reserve',
+	$.post('http://bicycle.scarlet9.net/bicycle/reserve',
 	{
 		'rid' : ''+currentRid
 	},
@@ -324,7 +324,7 @@ function reservationIm(){
 		return false;
 	} 
 	
-	$.post('/bicycle/reserve',
+	$.post('http://bicycle.scarlet9.net/bicycle/reserve',
 	{
 		'rid' : ''+currentRid
 	},
@@ -332,7 +332,7 @@ function reservationIm(){
 		// Success!				
 		window.localStorage.setItem('lastRackHistory', currentRid);
 		//location.href = '/reservation';
-		$.post('/bicycle/get', function(response) {
+		$.post('http://bicycle.scarlet9.net/bicycle/get', function(response) {
 			alert('대여에 성공하였습니다. 1시간 내로 거치대에 반납해주세요.');
 		})
 		.fail(function(jqxhr) {

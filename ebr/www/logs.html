@@ -168,9 +168,9 @@
 	var state_string = ['처리 중', '예약 중', '사용 중', '반납', '취소'];
 
 	// Get Racks information.
-	$.get('/racks', function(response) {
+	$.get('http://bicycle.scarlet9.net/racks', function(response) {
 		var racks = response.data;
-		$.get('/logs/fetch', function(response) {
+		$.get('http://bicycle.scarlet9.net/logs/fetch', function(response) {
 			var logs = response.data;
 
 			// All data fetched. Render a table.
@@ -215,7 +215,7 @@
 	
 	$('#do-cancel').click(function() {
 		// Post reservation cancel request.
-		$.post('/bicycle/cancel', function(response) {
+		$.post('http://bicycle.scarlet9.net/bicycle/cancel', function(response) {
 			// Fix log and clear DOM.
 			$('.log-state-1').find('td').last().text(state_string[4]);
 			$('#modal-cancel-zone').remove();
