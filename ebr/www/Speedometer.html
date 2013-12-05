@@ -40,9 +40,10 @@
 		$(function(){
 			$('#test').speedometer();
 
-			$('.changeSpeedometer').click(function(){
-				$('#test').speedometer({ percentage: $('.speedometer').val() || 0 });
-			});
+			var loop = function(){
+				$('#test').speedometer({ percentage: $("#spd").text() || 0 });
+			};
+			setInterval(loop, 5000);
 
 		});
 
@@ -56,35 +57,15 @@
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
-
-    // onSuccess Geolocation
-    //
-    function onSuccess(position) {
-
-    	//<!--var lat = position.coords.speed;-->
-	  var lat = position.coords.latitude;
-	  var lng = position.coords.longitude;
-	  var acc = position.coords.accuracy;
-	  var spd = position.coords.speed * 3.6;
-	  $("#lat").text (lat);
-	  $("#lng").text (lng);
-	  $("#acc").text (acc);
-	  $("#spd").text (spd);
-    }
-
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        }
 
     </script>
+
+    <!-- <div data-role="content">
+    	<a href="#" onclick="getcurrPosition();" data-role="button"></a>
+
+    </div> -->
+
+
 
 	</head>
 	
@@ -127,8 +108,8 @@
 
 
 
-						<input type="text" class="speedometer" value="90"></input>
-						<button class="changeSpeedometer">Submit</button><br/>
+						<!-- <input type="text" class="speedometer" value="0"></input> -->
+						<button class="changeSpeedometer" style="display: none">Submit</button><br/>
 
 						<div id="test">
 							0
@@ -137,13 +118,21 @@
 						<br />
 
 						<div data-role=content>
-							<span> Latitude : </span> <span id="lat"></span> <br />
-							<span> Longitude : </span> <span id="lng"></span> <br />
-							<span> Accuracy : </span> <span id="acc"></span> <br />
-							<span> Speed : </span> <span id="spd"></span> <br />
+							<span> Latitude : </span> <span id="lat">0</span> <br />
+							<span> Longitude : </span> <span id="lng">0</span> <br />
+							<span> Accuracy : </span> <span id="acc">0</span> <br />
+							<span> Speed : </span> <span id="spd">0</span> <br />
+							<span> X : </span> <span id="accX">0</span> <br />
+							<span> Y : </span> <span id="accY">0</span> <br />
+							<span> Z : </span> <span id="accZ">0</span> <br />
+							<span> Timestamp : </span> <span id="accStemp">0</span> <br />
 						</div>
-
-						<p id="geolocation">Finding geolocation...</p>
+						<!-- <div data-role=content>
+							<span> Latitude : </span> <span id="lat">0</span> <br />
+							<span> Longitude : </span> <span id="lng">0</span> <br />
+							<span> Accuracy : </span> <span id="acc">0</span> <br />
+							<span> Speed : </span> <span id="spd">0</span> <br />
+						</div> -->
 
 					</div>
 				</div>
@@ -152,15 +141,3 @@
 
 </body>
 </html>
-<script>
-
-navigator.geolocation.getCurrentPosition (function (pos)
-{
-  //<!--var lat = position.coords.speed;-->
-  var lat = pos.coords.speed * 3.6;
-  var lng = pos.coords.longitude;
-  $("#lat").text (lat);
-  $("#lng").text (lng);
-});
-
-</script>

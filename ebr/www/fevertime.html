@@ -58,7 +58,7 @@
 									<a href="Speedometer.html">속도계</a>
 								</li>
 								<li class="active">
-									<a href="fevertime.html">달려라 임마</a>
+									<a href="fevertime.html">남은 거리</a>
 								</li>
 
 							</ul>
@@ -80,30 +80,29 @@
 	</div>
 </div>
 <script type="text/javascript">
+
+
 (function($, gBrowser) {
 	
-	if(wpid > 0){
-		navigator.geolocation.clearWatch(wpid);
-		wpid = -1;
-	}
-
-	$("#remain").css("visibility", "hidden");
-	
-	$("#map-canvas").css("visibility", "visible");
+	feverInit();
 	
 	destinationDrop();
 })(jQuery, gBrowser);
 
 $( "#remain" ).click(function() {
-	
-	if(wpid > 0){
-		navigator.geolocation.clearWatch(wpid);
-		wpid = -1;
-	}
+	alert("click!!!!");
+	alert(navigator);
+	alert(navigator.notification);
+	alert(navigator.notification.prompt);
+	navigator.notification.prompt(
+		'목적지를 다시 설정하시겠습니까?',  // message
+		feverInit,                  // callback to invoke
+		'목적지',            // title
+		['Ok','Exit'],             // buttonLabels
+		'defaultText'                 // defaultText
+	);
 
-	$("#remain").css("visibility", "hidden");
-	
-	$("#map-canvas").css("visibility", "visible");
+	alert("click!!!! End");
 });
 </script>
 </body>

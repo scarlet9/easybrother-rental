@@ -348,3 +348,14 @@ function reservationIm(){
 	return false;
 
 }
+
+function feverInit(){
+	if(wpid > 0){
+		navigator.geolocation.clearWatch(wpid);
+		wpid = -1;
+	}
+
+	$("#remain").css("visibility", "hidden");
+	
+	$("#map-canvas").css("visibility", "visible");
+}

@@ -32,11 +32,76 @@ Options:
 	
 	digitalCss: Default settings object for digital readout. Modifying this is not supported.
 	
-*/
+	*/
+
+	var startTime=-1;
+	var nowTime=-1;
+	var movemove=0;
+	var usedCalorie=0;
+
+	function onDeviceReady() {
+		navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	}
+
+    // onSuccess Geolocation
+    //
+    function onSuccess(position) {
+
+    	//<!--var lat = position.coords.speed;-->
+    	var lat = position.coords.latitude;
+    	var lng = position.coords.longitude;
+    	var acc = position.coords.accuracy;
+    	var spd = position.coords.speed * 3.6;
+    	$("#lat").text (lat);
+    	$("#lng").text (lng);
+    	$("#acc").text (acc);
+    	$("#spd").text (spd);
+    }
+
+var geo_options = {
+	enableHighAccuracy: false, 
+	maximumAge        : 30000, 
+	timeout           : 27000
+};
+        // onError Callback receives a PositionError object
+        //
+    function onError_(error) {
+          	alert('code: '    + error.code    + '\n' +
+        		  'message: ' + error.message + '\n');
+     }
+
+function onSuccess2(acceleration) {
+	alert('fuck fuck');
+        var X = acceleration.X;
+    	var Y = acceleration.Y;
+    	var Z = acceleration.Z;
+    	var tiemStamp = acceleration.tiemStamp;
+    	$("#accX").text (X);
+    	$("#accY").text (Y);
+    	$("#accZ").text (Z);
+    	$("#accStemp").text (tiemStamp);
+    	alert('fuck');
+    }
+
+    function onError2() {
+        alert('onError!');
+    }
+
+function getcurrPosition(){
+	
+	navigator.geolocation.getCurrentPosition(onSuccess,onError_);
+
+}
+function getcurrAccel(){
+alert('die??');
+	navigator.accelerometer.getCurrentAcceleration(onSuccess2, onError2);
+}
+
 
 ( function( $ ){
 	$.fn.speedometer = function( options ){
 		/* A tad bit speedier, plus avoids possible confusion with other $(this) references. */
+		
 		var $this = $( this );
 		
 		/* handle multiple selectors */
@@ -47,6 +112,8 @@ Options:
 			});
 			return $this;
 		}	
+
+
 
 		var def = {
 			/* If not specified, look in selector's innerHTML before defaulting to zero. */
@@ -197,22 +264,94 @@ Options:
 
 		//var nowSpeed = position.coords.speed;
 
+		var showSpeed = parseInt(def.percentage);
+
 		/* Speed */
 		var digitalGauge = $( '<div></div>' );
 		$this.append( digitalGauge );
 		digitalGauge.css( def.digitalCss );
-		digitalGauge.text( "속도: " + def.percentage + def.suffix );
+		digitalGauge.text( "속도: " + showSpeed + def.suffix );
 
-/*		var digitalGauge = $( '<div></div>' );
-		$this.append( digitalGauge );
-		digitalGauge.css( def.digitalCss );
-		digitalGauge.text( "속도: " + nowSpeed + def.suffix );
-*/		
 		/* Calorie */
+		
+		var now = new Date();
+
+		if(startTime == -1)
+		{
+			startTime = now.getTime();
+		}
+		nowTime = now.getTime();
+		movemove = movemove + (def.percentage / 3600) * (nowTime - startTime) / 1000;
+		var kcalpermin = 0;
+
+		if(def.percentage >5 && def.percentage <= 13)
+		{
+			kcalpermin = 0.0650;
+		}
+		else if(def.percentage > 13 && def.percentage <= 16)
+		{
+			kcalpermin = 0.0783;
+		}
+		else if(def.percentage > 16 && def.percentage <= 19)
+		{
+			kcalpermin = 0.0939;	
+		}
+		else if(def.percentage > 19 && def.percentage <= 22)
+		{
+			kcalpermin = 0.1130;
+		}
+		else if(def.percentage > 22 && def.percentage <= 24)
+		{
+			kcalpermin = 0.1240;
+		}
+		else if(def.percentage > 24 && def.percentage <= 26)
+		{
+			kcalpermin = 0.1360;
+		}
+		else if(def.percentage > 26 && def.percentage <= 27)
+		{
+			kcalpermin = 0.1490;
+		}
+		else if(def.percentage > 27 && def.percentage <= 29)
+		{
+			kcalpermin = 0.1630;
+		}
+		else if(def.percentage > 29 && def.percentage <= 31)
+		{
+			kcalpermin = 0.1790;
+		}
+		else if(def.percentage > 31 && def.percentage <= 32)
+		{
+			kcalpermin = 0.1960;
+		}
+		else if(def.percentage > 32 && def.percentage <= 34)
+		{
+			kcalpermin = 0.2150;
+		}
+		else if(def.percentage > 34 && def.percentage <= 37)
+		{
+			kcalpermin = 0.2590;
+		}
+		else if(def.percentage > 37 && def.percentage <= 40)
+		{
+			kcalpermin = 0.3110;
+		}
+		else if(def.percentage > 40)
+		{
+			kcalpermin = 0.3110; //hm.....
+		}
+
+		usedCalorie = usedCalorie + kcalpermin * (80) * (nowTime - startTime) / (1000 * 60);
+
+		var nowCal = parseInt(usedCalorie);
+
 		var digitalGauge2 = $( '<div></div>' );
 		$this.append( digitalGauge2 );
 		digitalGauge2.css( def.digitalCss2 );
-		digitalGauge2.text( "칼로리: " + def.percentage + def.suffix2 );
+		digitalGauge2.text( "칼로리: " + nowCal + def.suffix2 );
+
+		getcurrPosition();
+		getcurrAccel();
 
 		
 		return $this;
