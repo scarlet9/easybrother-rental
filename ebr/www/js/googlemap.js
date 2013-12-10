@@ -226,7 +226,8 @@ function addDestination() {
     animation: google.maps.Animation.DROP
   });
   google.maps.event.addListener(marker, 'click', function(e) {    
-  
+    
+    $("#speedo").css("display", "block");
     $("#map-canvas").css("visibility", "hidden");
     $("#remain").text("Select Destination");
     destination = neighborhoods[id];
