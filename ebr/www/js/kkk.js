@@ -239,11 +239,17 @@ function geo_success_now(latit, longi) {
 		}
 
 		currentRid = rTemp[minIndex];
-		reservationIm();
+		
+		var km = parseFloat(minValue / 1000).toFixed(2);
 
-  	});
-
-
+		var yes = confirm('가장 가까운 곳은 ' + response.data[minIndex].name + '입니다. (' + km + 'km)\n자전거를 대여하시겠습니까?');
+		if (yes) {
+			reservationIm(response.data[minIndex].name);
+		}
+		else {
+			return;
+		}
+	});
 }
 
 function geo_success_logs(latit, longi, state_string){
@@ -317,7 +323,7 @@ function reservationClick(){
 
 }
 
-function reservationIm(){
+function reservationIm(name){
 
 	if (currentRid == -1) {			
 		console.log("rid error");
@@ -326,14 +332,14 @@ function reservationIm(){
 	
 	$.post('http://bicycle.scarlet9.net/bicycle/reserve',
 	{
-		'rid' : ''+currentRid
+		'rid' : '' + currentRid
 	},
 	function(response) {		
 		// Success!				
 		window.localStorage.setItem('lastRackHistory', currentRid);
 		//location.href = '/reservation';
 		$.post('http://bicycle.scarlet9.net/bicycle/get', function(response) {
-			alert('대여에 성공하였습니다. 1시간 내로 거치대에 반납해주세요.');
+			alert(name + '거치대에서 자전거 대여하였습니다. \n1시간 내로 거치대에 반납해주세요.');
 		})
 		.fail(function(jqxhr) {
 			// Fail.
