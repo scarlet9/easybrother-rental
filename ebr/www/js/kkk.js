@@ -32,7 +32,7 @@ $(function(){
 		var temp = i;
 		$( "#time-"+temp ).click(function() {		
 			$( "#time" ).text($(this).text());
-	});		
+		});		
 	}
 
 	$( "#btn-findmap" ).click(function() {
@@ -50,8 +50,8 @@ $(function(){
 		initReserveView();
 		
 		if(!(window.localStorage.getItem('lastRackHistory') == "" || 
-			window.localStorage.getItem('lastRackHistory') == null)){
 			// these functions are in googlemap.js
+			window.localStorage.getItem('lastRackHistory') == null)){
 			showRackState(window.localStorage.getItem('lastRackHistory'));
 			oneRackOnMap(window.localStorage.getItem('lastRackHistory'));
 		}
@@ -63,14 +63,14 @@ $(function(){
 		neighborsTemp = [];
 		nrTempEnd = false;
 		jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {		    
-		    for(var i = 0; i < response.data.length; i++){
-		    	racksTemp.push(response.data[i].rid);      
-		    	neighborsTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
-		    }   
-		    nrTempEnd = true;
-	  	});
+			for(var i = 0; i < response.data.length; i++){
+				racksTemp.push(response.data[i].rid);      
+				neighborsTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+			}   
+			nrTempEnd = true;
+		});
 
-	  	wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+		wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
 	});
 
 	$( "#btn-reserve" ).click(function() {
@@ -81,11 +81,11 @@ $(function(){
 	if(window.localStorage.getItem('lastRackHistory') == "" || 
 		window.localStorage.getItem('lastRackHistory') == null ){		
 		$( "#btn-lastRackHistory").addClass("disabled");
-	} else {
-		$( "#btn-lastRackHistory").removeClass("disabled");
-	}
+} else {
+	$( "#btn-lastRackHistory").removeClass("disabled");
+}
 
-	
+
 });
 
 var dayByday = true;
@@ -165,7 +165,7 @@ function clickResereBtn(){
 function nearestNeighborhood(latit, longi){
 	if(nrTempEnd === true){
 		var currentLocation = new google.maps.LatLng(latit, longi);
-	
+
 		var minValue = calcDistance(currentLocation, neighborsTemp[0]);
 		var minIndex = 0;
 
@@ -183,7 +183,7 @@ function nearestNeighborhood(latit, longi){
 
 	return -1;
 	
-  
+
 }
 
 function calcDistance(p1, p2){
@@ -202,9 +202,6 @@ function geo_success(position) {
 			oneRackOnMap(minRackId);
 		}	
 	}
-	
-	
-
 }
 
 function geo_error() {
@@ -221,13 +218,13 @@ function geo_success_now(latit, longi) {
 	var nTemp = [];
 	var rTemp = [];
 	jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {
-	    for(var i = 0; i < response.data.length; i++){
-	    	rTemp.push(response.data[i].rid);      
-	    	nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
-	    }   
-	    
-	    var currentLocation = new google.maps.LatLng(latit, longi);
-	
+		for(var i = 0; i < response.data.length; i++){
+			rTemp.push(response.data[i].rid);      
+			nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+		}   
+
+		var currentLocation = new google.maps.LatLng(latit, longi);
+
 		var minValue = calcDistance(currentLocation, nTemp[0]);
 		var minIndex = 0;
 
@@ -239,29 +236,32 @@ function geo_success_now(latit, longi) {
 				minIndex = i;
 			}
 		}
-			
-	var km = parseFloat(minValue / 1000).toFixed(2); 
-	var yes = confirm('가장 가까운 곳은 ' + response.data[minIndex].name + '입니다. (' + km + 'km)\n자전거를 대여하시겠습니까?');
-	if (yes) {
-		reservationIm(response.data[minIndex].name);
-	}
-	else {
-		return;
-	}
-});
+
+		currentRid = rTemp[minIndex];
+
+		var km = parseFloat(minValue / 1000).toFixed(2); 
+		var yes = confirm('가장 가까운 곳은 ' + response.data[minIndex].name + '입니다. (' + km + 'km)\n자전거를 대여하시겠습니까?');
+		
+		if (yes) {
+			reservationIm(response.data[minIndex].name);
+		}
+		else {
+			return;
+		}
+	});
 }
 
 function geo_success_logs(latit, longi, state_string){
 	var nTemp = [];
 	var rTemp = [];
 	jQuery.get('http://bicycle.scarlet9.net/racks', function(response) {
-	    for(var i = 0; i < response.data.length; i++){
-	    	rTemp.push(response.data[i].rid);      
-	    	nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
-	    }   
-	    
-	    var currentLocation = new google.maps.LatLng(latit, longi);
-	
+		for(var i = 0; i < response.data.length; i++){
+			rTemp.push(response.data[i].rid);      
+			nTemp.push(new google.maps.LatLng(response.data[i].latitude, response.data[i].longitude));
+		}   
+
+		var currentLocation = new google.maps.LatLng(latit, longi);
+
 		var minValue = calcDistance(currentLocation, nTemp[0]);
 		var minIndex = 0;
 
@@ -293,7 +293,7 @@ function geo_success_logs(latit, longi, state_string){
 			alert(jqxhr.responseJSON.data);
 		});
 
-  	});
+	});
 }
 
 function reservationClick(){
@@ -316,7 +316,7 @@ function reservationClick(){
 	.fail(function(jqxhr) {
 			// Fail.
 			alert(jqxhr.responseJSON.data);
-	});
+		});
 	
 	return false;
 
@@ -334,7 +334,7 @@ function reservationIm(name){
 		'rid' : ''+currentRid
 	},
 	function(response) {		
-		// Success!				
+		// Success!	
 		window.localStorage.setItem('lastRackHistory', currentRid);
 		//location.href = '/reservation';
 		$.post('http://bicycle.scarlet9.net/bicycle/get', function(response) {
@@ -349,7 +349,7 @@ function reservationIm(name){
 	.fail(function(jqxhr) {
 			// Fail.
 			alert(jqxhr.responseJSON.data);
-	});
+		});
 	
 	return false;
 

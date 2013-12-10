@@ -31,10 +31,10 @@
     <icon gap:density="xhdpi" gap:platform="android" src="img/96.png" />
     <icon gap:platform="blackberry" src="img/80.png" />
     <icon gap:platform="blackberry" gap:state="hover" src="img/80.png" />
-    <icon gap:platform="ios" height="57" src="img/apple-touch-icon-57-precomposed.png" width="57" />
-    <icon gap:platform="ios" height="72" src="img/apple-touch-icon-72-precomposed.png" width="72" />
-    <icon gap:platform="ios" height="114" src="img/apple-touch-icon-114-precomposed.png" width="114" />
-    <icon gap:platform="ios" height="144" src="img/apple-touch-icon-144-precomposed.png" width="144" />
+    <icon gap:platform="ios" height="57" src="img/57.png" width="57" />
+    <icon gap:platform="ios" height="72" src="img/72.png" width="72" />
+    <icon gap:platform="ios" height="114" src="img/114.png" width="114" />
+    <icon gap:platform="ios" height="144" src="img/144.png" width="144" />
     <icon gap:platform="winphone" src="img/48.png" />
     <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173.png" />
     <gap:splash gap:density="ldpi" gap:platform="android" src="res/screen/android/songdo320x480.jpg" />
