@@ -71,7 +71,6 @@ var geo_options = {
      }
 
 function onSuccess2(acceleration) {
-	alert('fuck fuck');
         var X = acceleration.X;
     	var Y = acceleration.Y;
     	var Z = acceleration.Z;
@@ -80,7 +79,6 @@ function onSuccess2(acceleration) {
     	$("#accY").text (Y);
     	$("#accZ").text (Z);
     	$("#accStemp").text (tiemStamp);
-    	alert('fuck');
     }
 
     function onError2() {
@@ -93,7 +91,6 @@ function getcurrPosition(){
 
 }
 function getcurrAccel(){
-alert('die??');
 	navigator.accelerometer.getCurrentAcceleration(onSuccess2, onError2);
 }
 
