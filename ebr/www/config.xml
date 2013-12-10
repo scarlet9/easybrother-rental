@@ -2,10 +2,10 @@
 <widget id="org.poolc.ebr" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>YonseiBicycle</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+       easybrother rental
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+        team MoolC
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions" value="none" />
@@ -13,9 +13,9 @@
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
-    <preference name="prerendered-icon" value="true" />
+    <preference name="prerendered-icon" value="false" />
     <preference name="stay-in-webview" value="false" />
-    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="ios-statusbarstyle" value="default" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
     <preference name="show-splash-screen-spinner" value="true" />
@@ -24,7 +24,7 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <preference name="phonegap-version" value="3.1.0" />
-    <icon src="icon.png" />
+    <icon src="img/96.png" />
     <icon gap:density="ldpi" gap:platform="android" src="img/36.png" />
     <icon gap:density="mdpi" gap:platform="android" src="img/48.png" />
     <icon gap:density="hdpi" gap:platform="android" src="img/72.png" />
