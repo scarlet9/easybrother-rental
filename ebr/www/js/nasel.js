@@ -93,7 +93,6 @@
 	$(function() {
 		wpid = navigator.geolocation.getCurrentPosition(function(position) {
 			getWeather(position.coords.latitude, position.coords.longitude, function(forecast) {
-				alert('getweatherdone');
 				window.weather = forecast;
 
 				var index = 0, $nasel = $('#nasel-zone');
@@ -107,7 +106,7 @@
 					$new.appendTo($nasel).slideDown(1000);
 
 					index = ((index + 1) % forecast.length);
-				}, 5000);
+				}, 4000);
 			});
 		}, 
 		function() {
