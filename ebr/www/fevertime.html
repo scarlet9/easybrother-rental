@@ -90,19 +90,7 @@
 })(jQuery, gBrowser);
 
 $( "#remain" ).click(function() {
-	alert("click!!!!");
-	alert(navigator);
-	alert(navigator.notification);
-	alert(navigator.notification.prompt);
-	navigator.notification.prompt(
-		'목적지를 다시 설정하시겠습니까?',  // message
-		feverInit,                  // callback to invoke
-		'목적지',            // title
-		['Ok','Exit'],             // buttonLabels
-		'defaultText'                 // defaultText
-	);
-
-	alert("click!!!! End");
+	feverInit();
 });
 </script>
 </body>

@@ -354,8 +354,6 @@ function feverInit(){
 		navigator.geolocation.clearWatch(wpid);
 		wpid = -1;
 	}
-
-	$("#remain").css("visibility", "hidden");
 	
 	$("#map-canvas").css("visibility", "visible");
 }
