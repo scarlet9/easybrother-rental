@@ -225,8 +225,7 @@ function addDestination() {
     draggable: false,
     animation: google.maps.Animation.DROP
   });
-  google.maps.event.addListener(marker, 'click', function(e) {
-    $("#remain").css("visibility", "visible");
+  google.maps.event.addListener(marker, 'click', function(e) {    
   
     $("#map-canvas").css("visibility", "hidden");
     destination = neighborhoods[id];
