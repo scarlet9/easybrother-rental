@@ -25,28 +25,27 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="phonegap-version" value="3.1.0" />
     <icon src="icon.png" />
-    <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
-    <icon gap:density="mdpi" gap:platform="android" src="res/icon/android/icon-48-mdpi.png" />
-    <icon gap:density="hdpi" gap:platform="android" src="res/icon/android/icon-72-hdpi.png" />
-    <icon gap:density="xhdpi" gap:platform="android" src="res/icon/android/icon-96-xhdpi.png" />
-    <icon gap:platform="blackberry" src="res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="blackberry" gap:state="hover" src="res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="ios" height="57" src="res/icon/ios/icon-57.png" width="57" />
-    <icon gap:platform="ios" height="72" src="res/icon/ios/icon-72.png" width="72" />
-    <icon gap:platform="ios" height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
-    <icon gap:platform="ios" height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
-    <icon gap:platform="webos" src="res/icon/webos/icon-64.png" />
-    <icon gap:platform="winphone" src="res/icon/windows-phone/icon-48.png" />
+    <icon gap:density="ldpi" gap:platform="android" src="img/36.png" />
+    <icon gap:density="mdpi" gap:platform="android" src="img/48.png" />
+    <icon gap:density="hdpi" gap:platform="android" src="img/72.png" />
+    <icon gap:density="xhdpi" gap:platform="android" src="img/96.png" />
+    <icon gap:platform="blackberry" src="img/80.png" />
+    <icon gap:platform="blackberry" gap:state="hover" src="img/80.png" />
+    <icon gap:platform="ios" height="57" src="img/apple-touch-icon-57-precomposed.png" width="57" />
+    <icon gap:platform="ios" height="72" src="img/apple-touch-icon-72-precomposed.png" width="72" />
+    <icon gap:platform="ios" height="114" src="img/apple-touch-icon-114-precomposed.png" width="114" />
+    <icon gap:platform="ios" height="144" src="img/apple-touch-icon-144-precomposed.png" width="144" />
+    <icon gap:platform="winphone" src="img/48.png" />
     <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173.png" />
-    <gap:splash gap:density="ldpi" gap:platform="android" src="res/screen/android/screen-ldpi-portrait.png" />
-    <gap:splash gap:density="mdpi" gap:platform="android" src="res/screen/android/screen-mdpi-portrait.png" />
-    <gap:splash gap:density="hdpi" gap:platform="android" src="res/screen/android/screen-hdpi-portrait.png" />
-    <gap:splash gap:density="xhdpi" gap:platform="android" src="res/screen/android/screen-xhdpi-portrait.png" />
+    <gap:splash gap:density="ldpi" gap:platform="android" src="res/screen/android/songdo320x480.jpg" />
+    <gap:splash gap:density="mdpi" gap:platform="android" src="res/screen/android/songdo640x960.jpg" />
+    <gap:splash gap:density="hdpi" gap:platform="android" src="res/screen/android/songdo640x960.jpg" />
+    <gap:splash gap:density="xhdpi" gap:platform="android" src="res/screen/android/songdo640x960.jpg" />
     <gap:splash gap:platform="blackberry" src="res/screen/blackberry/screen-225.png" />
-    <gap:splash gap:platform="ios" height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
-    <gap:splash gap:platform="ios" height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
-    <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
-    <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
+    <gap:splash gap:platform="ios" height="480" src="img/songdo320x480.jpg" width="320" />
+    <gap:splash gap:platform="ios" height="960" src="img/songdo640x960.jpg" width="640" />
+    <gap:splash gap:platform="ios" height="1024" src="img/songdo1024x768.jpg" width="768" />
+    <gap:splash gap:platform="ios" height="768" src="img/songdo768x1024.jpg" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
 
     <gap:platform name="ios" />
