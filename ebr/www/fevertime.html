@@ -33,6 +33,27 @@
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
 	<script type="text/javascript" src="js/googlemap.js"></script>
 	<script type="text/javascript" src="js/kkk.js"></script>
+
+
+	<!-- Seepdometer-->
+	<script src="js/jquery-1.4.min.js"></script>
+	<script src="js/jquery.speedometer.js"></script>
+	<script src="js/jquery.jqcanvas-modified.js"></script>
+	<script src="js/excanvas-modified.js"></script>
+	<script>
+
+		$(function(){
+			$('#test').speedometer();
+
+			var loop = function(){
+				$('#test').speedometer({ percentage: $("#spd").text() || 0 });
+			};
+			setInterval(loop, 5000);
+
+		});
+
+		
+	</script>
 </head>
 
 <body>
@@ -74,7 +95,27 @@
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-primary" type="button" id="remain">wait plz...</button>
+			<div id = "speedo">
+				<button class="changeSpeedometer" style="display: none">Submit</button><br/>
+
+				<div id="test">
+					0
+				</div>
+
+				<br />
+
+				<div data-role=content>
+					<span> Latitude : </span> <span id="lat">0</span> <br />
+					<span> Longitude : </span> <span id="lng">0</span> <br />
+					<span> Accuracy : </span> <span id="acc">0</span> <br />
+					<span> Speed : </span> <span id="spd">0</span> <br />
+					<span> X : </span> <span id="accX">0</span> <br />
+					<span> Y : </span> <span id="accY">0</span> <br />
+					<span> Z : </span> <span id="accZ">0</span> <br />
+					<span> Timestamp : </span> <span id="accStemp">0</span> <br />
+				</div>
+			</div>
+			<button class="btn btn-primary" type="button" id="remain">Select Destination</button>
 			<div id="map-canvas"></div>
 		</div>
 	</div>

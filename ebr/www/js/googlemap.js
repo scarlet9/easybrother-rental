@@ -228,6 +228,7 @@ function addDestination() {
   google.maps.event.addListener(marker, 'click', function(e) {    
   
     $("#map-canvas").css("visibility", "hidden");
+    $("#remain").text("Select Destination");
     destination = neighborhoods[id];
     wpid = navigator.geolocation.watchPosition(dest_success, geo_error, geo_options);
   });

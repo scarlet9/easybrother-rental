@@ -5,6 +5,8 @@ var racksTemp = [];
 var isMap = false;
 var wpid = -1;
 var lastRackId = -2;
+
+var isSeepdo = true;
 $(function(){
 
 	
@@ -359,7 +361,20 @@ function feverInit(){
 	if(wpid > 0){
 		navigator.geolocation.clearWatch(wpid);
 		wpid = -1;
+
+	} 
+
+	if(isSeepdo){
+		$("#speedo").css("display", "block");
+		$("#map-canvas").css("visibility", "hidden");
+		$("#remain").text("Select Destination");
+
+	}else{
+		$("#speedo").css("display", "none")
+		$("#map-canvas").css("visibility", "visible");
+		$("#remain").text("선택하지 않기");	
 	}
+
+	isSeepdo = !isSeepdo;
 	
-	$("#map-canvas").css("visibility", "visible");
 }
